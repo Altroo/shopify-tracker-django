@@ -1,0 +1,11 @@
+.DS_Store
+.idea/
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+# media/
+shopify_tracker_backend/__pycache__
+# account/base/__pycache__
+# account/migrations
+# account/__pycache__
