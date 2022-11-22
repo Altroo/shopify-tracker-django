@@ -138,6 +138,24 @@ class ProductsTracker:
                 break
         return image_url
 
+    def get_product_sales_amount(self, shop_url: str, product_id: str, variant_id=None) -> dict:
+        variant_sales = 0.0
+        variant_sales_array = []
+        product_sales = 0.0
+        sale: dict
+        for sale in self.products[shop_url]['products'][product_id]['sales']:
+            if variant_id:
+                if sale['variant']['product_id'] == variant_id:
+                    variant_sales_array.append(sale)
+                    variant_sales += float(sale['price'])
+                product_sales += float(sale['price'])
+        return {
+            'variant': variant_sales,
+            'variant_quantity': variant_sales_array.__len__(),
+            'product': product_sales,
+            'product_quantity': self.products[shop_url]['products'][product_id]['sales'].__len__(),
+        }
+
     def on_new_sale(self, shop_url: str, product: dict, sold_variant: [dict, None]):
         pass
 
