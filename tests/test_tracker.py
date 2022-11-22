@@ -156,6 +156,13 @@ class ProductsTracker:
             'product_quantity': self.products[shop_url]['products'][product_id]['sales'].__len__(),
         }
 
+    def get_shop_sales_amount(self, shop_url: str) -> Union[float, int]:
+        summary = 0
+        for key, value in self.products[shop_url]['products'].items():
+            product_sales = self.get_product_sales_amount(shop_url, value['id'])
+            summary += float(product_sales['product'])
+        return summary
+
     def on_new_sale(self, shop_url: str, product: dict, sold_variant: [dict, None]):
         pass
 
