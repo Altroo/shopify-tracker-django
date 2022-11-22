@@ -129,109 +129,14 @@ class ProductsTracker:
         })
         self.products[shop_url]['products'][data['id']]['updated_at'] = data['updated_at']
 
-    #  async onNewSale(shop_url, data, sold_variant) {
-    #             let field_text = '';
-    #             let key_translations = {
-    #                 title: 'Titel',
-    #                 sku: 'SKU',
-    #                 price: 'Preis',
-    #                 compare_at_price: 'Vergleichspreis',
-    #                 position: 'Position',
-    #                 product_id: 'Identifier',
-    #             };
-    #
-    #             const all_together = this.getProductSalesAmount(
-    #                 shop_url,
-    #                 data['id'],
-    #                 sold_variant ? sold_variant['product_id'] : undefined
-    #             );
-    #
-    #             if (sold_variant) {
-    #                 ['title', 'sku', 'compare_at_price', 'price'].forEach((key) => {
-    #                     if (sold_variant[key]) {
-    #                         field_text += `**${key_translations[key]}**: \`\`${sold_variant[key]}\`\`\n`;
-    #                     }
-    #                 });
-    #             }
-    #
-    #             const summary_shop = await this.getShopSalesAmount(shop_url);
-    #
-    #             const field = sold_variant
-    #                 ? {
-    #                     name: 'Variante:',
-    #                     value: field_text,
-    #                     inline: true,
-    #                 }
-    #                 : undefined;
-    #
-    #             const field2 = sold_variant
-    #                 ? {
-    #                     name: 'Statistiken (Variante):',
-    #                     value: `**Geschätzte Einnahmen:** \`\`${all_together['variant']}\`\`\n**Verkauft:** \`\`${all_together['variant_quantity']}x\`\``,
-    #                     inline: true,
-    #                 }
-    #                 : undefined;
-    #
-    #             const field3 = {
-    #                 name: 'Statistiken (Shop):',
-    #                 value: `**Geschätzte Einnahmen:** \`\`${summary_shop}\`\``,
-    #                 inline: false,
-    #             };
-    #
-    #             const embed = app.utils.discord.createEmbed('info', {
-    #                 title: `Neuer Verkauf [${shop_url}]`,
-    #                 description: `[Klicke hier um auf die Produktseite zu gelangen](https://${shop_url}/products/${data['handle']
-    #                 })\n**Produkt:** \`\`${data['title']
-    #                 }\`\`\n**Verkauft um:** \`\`${app.utils.time.getDateStringServ(
-    #                     data['updated_at']
-    #                 )}\`\`\n**Tracker gestartet um:** \`\`${app.utils.time.getDateStringServ(
-    #                     app.shopify.database.started_at
-    #                 )}\`\`\n**Preis:** ${data['variants'][0]['compare_at_price']
-    #                     ? `${data['variants'][0]['price']} ~~${data['variants'][0]['compare_at_price']}~~`
-    #                     : `\`\`${data['variants'][0]['price']}\`\``
-    #                 }`,
-    #
-    #                 thumbnail: {
-    #                     url: sold_variant
-    #                         ? sold_variant['featured_image']
-    #                             ? this.findImageById(data.images, sold_variant['featured_image']['id'])
-    #                             : data['images'][0]['src']
-    #                         : data['images'][0]['src'],
-    #                 },
-    #                 fields: sold_variant
-    #                     ? [
-    #                         field,
-    #                         {
-    #                             name: 'Statistiken  (Produkt):',
-    #                             value: `**Einnahmen:** \`\`${all_together['product']}\`\`\n**Verkauft:** \`\`${all_together['product_quantity']}x\`\``,
-    #                             inline: true,
-    #                         },
-    #                         field2,
-    #                         field3,
-    #                     ]
-    #                     : [
-    #                         {
-    #                             name: 'Statistiken (Produkt):',
-    #                             value: `**Einnahmen:** \`\`${all_together['product']}\`\`\n**Verkauft:** \`\`${all_together['product_quantity']}x\`\``,
-    #                             inline: true,
-    #                         },
-    #                         field3
-    #                     ],
-    #                 color: 3066993,
-    #             });
-    #
-    #             await app.modules.axios.post(
-    #                 app.shopify.config['webhooks'][shop_url]
-    #                     ? app.shopify.config['webhooks'][shop_url]
-    #                     : app.shopify.config['webhooks']['default'],
-    #                 JSON.stringify({embeds: [embed]}),
-    #                 {
-    #                     headers: {
-    #                         'Content-type': 'application/json',
-    #                     },
-    #                 }
-    #             );
-    #         },
+    @staticmethod
+    def find_image_by_id(images: dict, id_: str):
+        image_url = None
+        for image in images:
+            if image['id'] == id_:
+                image_url = image['src']
+                break
+        return image_url
 
     def on_new_sale(self, shop_url: str, product: dict, sold_variant: [dict, None]):
         pass
@@ -245,7 +150,6 @@ class ProductsTracker:
             last_sale: Union[str, None] = self.get_latest_sale(shop_url, product['id'])
             # unecessary to add same variable on both check sides but i'm just translating lol
             if last_sale and product['updated_at'] != last_sale:
-                # const prod = app.shopify.database[shop_url]['products'][`${product['id']}`];
                 prod: dict = self.products[shop_url]['products'][product['id']]
                 diff = jsondiff.diff(
                     self.create_product_object(product),
