@@ -121,8 +121,23 @@ class ProductsTracker:
             'sold_variant': sold_variant
         }
 
-    def update_latest_sale(self, shop_url: str, product: dict, sold_variant: Union[str, None]):
-        pass
+    # async updateLatestSale(shop_url, data, sold_variant) {
+    #             app.shopify.database[shop_url]['products'][`${data['id']}`]['sales'].push({
+    #                 time: data['updated_at'],
+    #                 variant: sold_variant,
+    #                 price: sold_variant ? sold_variant['price'] : data['variants'][0]['price'],
+    #             });
+    #             app.shopify.database[shop_url]['products'][`${data['id']}`]['updated_at'] =
+    #                 data['updated_at'];
+    #         },
+
+    def update_latest_sale(self, shop_url: str, data: dict, sold_variant: Union[dict, None]):
+        self.products[shop_url]['products'][data['id']]['sales'].append({
+            'time': data['updated_at'],
+            'variant': sold_variant,
+            'price': sold_variant['price'] if sold_variant is not None else data['variants'][0]['price'],
+        })
+        self.products[shop_url]['products'][data['id']]['updated_at'] = data['updated_at']
 
     def check_for_sales(self, shop_url: str):
         data: dict = requests.get(self.product_info(shop_url)).json()
