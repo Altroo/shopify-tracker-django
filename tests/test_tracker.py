@@ -4,29 +4,24 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'shopify_tracker_backend.settings')
 application = get_wsgi_application()
 
-import json
-import sys
 from typing import Union
 from django.db.models import QuerySet
 from shops.models import Shops
-# from products.models import Products
-from csv import reader
 from os import path
-from collections import defaultdict
 from time import sleep, mktime
 from random import randrange
-from django.db.utils import IntegrityError
 import requests
 import datetime
 import jsondiff
+from threading import Timer
 
 
 class ProductsTracker:
     parent_file_dir = path.abspath(path.join(path.dirname(__file__), "../../.."))
 
     @staticmethod
-    def date_time_milliseconds(date_time_obj: datetime) -> int:
-        return int(mktime(date_time_obj.timetuple()) * 1000)
+    def date_time_milliseconds(date_time_obj: datetime) -> float:
+        return float(mktime(date_time_obj.timetuple()) * 1000)
 
     def __init__(self):
         self.shops: Union[list[Union[QuerySet, Shops]], None] = None
@@ -39,12 +34,20 @@ class ProductsTracker:
     def track(self):
         self.shops: list[Union[QuerySet, Shops]] = list(
             Shops.objects.filter(track_enabled=True).exclude(availability=False))
-        self.load_products()
+        return self.load_products()
 
-    def load_products(self):
+    def load_products(self) -> Union[list[Union[QuerySet, Shops]], None]:
         for shop in self.shops:
             sleep(randrange(1, 10))
-            response = requests.get(self.product_info(shop.shop_url)).json()
+            response = requests.get(self.product_info(shop.shop_url))
+            if response.status_code == 404:
+                shop.availability = False
+                shop.track_enabled = False
+                shop.save()
+                print(f"Link {shop.shop_url} returned 404, setting db tracked & availability to False.")
+                break
+            else:
+                response = response.json()
             started_at = self.date_time_milliseconds(datetime.datetime.utcnow())
             products = response['products'] if response['products'] else []
             new_obj = {
@@ -56,8 +59,8 @@ class ProductsTracker:
                 new_obj['products'][product_obj['id']] = product_obj
             self.products[shop.shop_url] = new_obj
             print(f"Added {shop.shop_url} with {self.products[shop.shop_url]['products'].__len__()} "
-                  f"products to memory database.\n")
-            self.check_for_sales(shop.shop_url)
+                  f"products to memory database.")
+        return self.shops
 
     @staticmethod
     def create_product_object(value: dict) -> dict:
@@ -81,16 +84,15 @@ class ProductsTracker:
     def remove_shop(self, index: int):
         shop_url: str = self.shops[index].shop_url
         del self.shops[index]
-        sys.stdout.write(f'Removed ${shop_url} from memory database.\n')
+        print(f'Removed {shop_url} from memory database.')
+        # sys.stdout.write(f'Removed {shop_url} from memory database.\n')
 
     def check_for_new_products(self, shop_url: str, data: dict):
         for product in data['products']:
             if not product['id'] in self.products[shop_url]['products'].keys():
                 product_obj = self.create_product_object(product)
                 self.products[shop_url]['products'][product_obj['id']] = product_obj
-                print(f"Added new product ${product_obj['title']} from ${shop_url} to memory database.\n")
-            else:
-                print(f"Product ${product['title']} from ${shop_url} already exists in memory database.\n")
+                print(f"Added new product {product_obj['title']} from {shop_url} to memory database.")
 
     def get_latest_sale(self, shop_url: str, product_id: int) -> Union[str, None]:
         for key, value in self.products[shop_url]['products'].items():
@@ -103,21 +105,21 @@ class ProductsTracker:
             self.create_product_object(new_product)
         )
         sold_variant: Union[dict: None] = None
-        new_sale: bool = False  # False ?
+        new_sale: bool = False
 
         if diff.items().__len__() <= 2:
             if diff['updated_at']:
                 new_sale = True
                 if diff['variants']:
-                    for key, value in old_product['variants'].items:
-                        if value['updated_at'] != new_product['variants'][key]['updated_at']:
-                            sold_variant = new_product['variants'][key]
-                            break
+                    for key, variant in enumerate(old_product['variants']):
+                        for item in variant.items():
+                            if item[0] == 'updated_at' and item[1] != new_product['variants'][key]['updated_at']:
+                                sold_variant = new_product['variants'][key]
+                                break
 
         return {
             'diff': diff,
             'new_sale': new_sale,
-            # 'sold_variant': sold_variant if sold_variant is not None else None
             'sold_variant': sold_variant
         }
 
@@ -144,11 +146,11 @@ class ProductsTracker:
         product_sales = 0.0
         sale: dict
         for sale in self.products[shop_url]['products'][product_id]['sales']:
-            if variant_id:
+            if variant_id and sale['variant'] is not None and 'product_id' in sale['variant'].keys():
                 if sale['variant']['product_id'] == variant_id:
                     variant_sales_array.append(sale)
                     variant_sales += float(sale['price'])
-                product_sales += float(sale['price'])
+            product_sales += float(sale['price'])
         return {
             'variant': variant_sales,
             'variant_quantity': variant_sales_array.__len__(),
@@ -173,7 +175,7 @@ class ProductsTracker:
         if sold_variant:
             for key in ['title', 'sku', 'compare_at_price', 'price']:
                 if sold_variant[key]:
-                    field_text += f'{key}: {sold_variant[key]}\n'
+                    field_text += f'{key}: {sold_variant[key]} \n '
 
         summary_shop = self.get_shop_sales_amount(shop_url)
 
@@ -184,13 +186,13 @@ class ProductsTracker:
 
         field_2 = {
             'name': 'Statistics (Variante):',
-            'value': f"Estimated earnings: {all_together['variant']} \n"
-                     f"Quantity sold: {all_together['variant_quantity']}x \n"
+            'value': f"Estimated earnings: {all_together['variant']} \n "
+                     f"Quantity sold: {all_together['variant_quantity']}x \n "
         } if sold_variant else None
 
         field_3 = {
             'name': 'Statistics (Shop):',
-            'value': f"Estimated earnings: {summary_shop}\n"
+            'value': f"Estimated earnings: {summary_shop} \n "
         }
 
         price = data['variants'][0]['price']
@@ -205,11 +207,11 @@ class ProductsTracker:
             'info': {
                 'title': f"New sale: {shop_url}",
                 'description':
-                    f"Click here to go to the product page : {shop_url}/products/{data['handle']} \n"
-                    f"Product : {data['title']}\n"
-                    f"Sold at : {self.get_date_string_serv(data['updated_at'])} \n"
-                    f"Tracker started at : {self.get_date_string_serv(self.products[shop_url]['started_at'])} \n"
-                    f"Price : {price} \n",
+                    f"Click here to go to the product page : {shop_url}/products/{data['handle']} \n "
+                    f"Product : {data['title']} \n "
+                    f"Sold at : {self.get_readable_date(data['updated_at'])} \n "
+                    f"Tracker started at : {self.get_date_string_serv(self.products[shop_url]['started_at'])} \n "
+                    f"Price : {price} \n ",
             },
             'thumbnail': {
                 'url': url
@@ -217,28 +219,31 @@ class ProductsTracker:
             'fields': [
                 field,
                 {
-                    'name': 'Statistics (product):',
-                    'value': f"Earnings: {all_together['product']}\n"
-                             f"Sold : {all_together['product_quantity']}x \n"
+                    'name': 'Statistics (product): ',
+                    'value': f"Earnings: {all_together['product']} \n "
+                             f"Sold : {all_together['product_quantity']}x \n "
                 },
                 field_2,
                 field_3
             ] if sold_variant else [
                 {
-                    'name': 'Statistics (product):',
-                    'value': f"Earnings: {all_together['product']}\n"
-                             f"Sold : {all_together['product_quantity']}x \n"
+                    'name': 'Statistics (product): ',
+                    'value': f"Earnings: {all_together['product']} \n "
+                             f"Sold : {all_together['product_quantity']}x \n "
                 },
                 field_3
             ]
         }
-        # prints the result that is sent to discord
+        # /** ** prints the result that is sent to discord ** **/
         print(embed)
 
     @staticmethod
     def get_date_string_serv(timestamp: float) -> str:
-        d = datetime.datetime.fromtimestamp(timestamp)
-        return f"{str(d)}"
+        return f"{str(datetime.datetime.fromtimestamp(timestamp / 1000))}"
+
+    @staticmethod
+    def get_readable_date(date: str) -> str:
+        return f"{str(datetime.datetime.strptime(date[0:-6], '%Y-%m-%dT%H:%M:%S'))}"
 
     def check_for_sales(self, shop_url: str):
         data: dict = requests.get(self.product_info(shop_url)).json()
@@ -256,16 +261,33 @@ class ProductsTracker:
                 )
                 if diff.items().__len__() <= 2 and diff['updated_at']:
                     sold_variant: Union[dict, None] = None
-                    if diff['variants']:
+                    if 'variants' in diff.keys():
                         check: dict = self.check_for_diff(prod, product)
                         sold_variant = check['sold_variant']
                     self.update_latest_sale(shop_url, product, sold_variant)
-                    print(f"{shop_url} {self.products[shop_url]['products'][product['id']]['sales'].__len__()} "
-                          f"New sale -> {product['title']}")
+                    print(
+                        f"{shop_url} - just sold : "
+                        f"{self.products[shop_url]['products'][product['id']]['sales'].__len__()} \n"
+                        f"New sale -> {product['title']}")
 
                     self.on_new_sale(shop_url, product, sold_variant)
 
 
 if __name__ == '__main__':
     products_tracker = ProductsTracker()
-    products_tracker.track()
+    shops = products_tracker.track()
+
+
+    def set_interval(func, sec, shop_url):
+        def func_wrapper():
+            set_interval(func, sec, shop_url)
+            func(shop_url)
+
+        t = Timer(sec, func_wrapper)
+        t.start()
+        return t
+
+
+    interval = 48
+    for shop_ in shops:
+        set_interval(products_tracker.check_for_sales, interval, shop_.shop_url)
