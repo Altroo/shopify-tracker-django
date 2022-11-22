@@ -18,6 +18,7 @@ from random import randrange
 from django.db.utils import IntegrityError
 import requests
 import datetime
+import jsondiff
 
 
 class ProductsTracker:
@@ -29,7 +30,6 @@ class ProductsTracker:
 
     def __init__(self):
         self.shops: Union[list[Union[QuerySet, Shops]], None] = None
-        # defaultdict(<class 'list'>, {0: [0], 1: [1], 2: [2], 3: [3], 4: [4]})
         self.products: dict = {}
 
     @staticmethod
@@ -43,7 +43,6 @@ class ProductsTracker:
 
     def load_products(self):
         for shop in self.shops:
-            # if shop.shop_url not in self.products.keys():
             sleep(randrange(1, 10))
             response = requests.get(self.product_info(shop.shop_url)).json()
             started_at = self.date_time_milliseconds(datetime.datetime.utcnow())
@@ -101,12 +100,23 @@ class ProductsTracker:
     def check_for_sales(self, shop_url: str):
         data: dict = requests.get(self.product_info(shop_url)).json()
         self.check_for_new_products(shop_url, data)
-        for product_id, values in self.products[shop_url]['products'].items():
-            last_sale: Union[str, None] = self.get_latest_sale(shop_url, product_id)
-            # if (last_sale && product['updated_at'] !== last_sale) {
-            if last_sale and values.get('updated_at') != last_sale:
+
+        for product in data['products']:
+            last_sale: Union[str, None] = self.get_latest_sale(shop_url, product['id'])
+            # unecessary to add same variable on both check sides but i'm just translating lol
+            if last_sale and product['updated_at'] != last_sale:
                 # const prod = app.shopify.database[shop_url]['products'][`${product['id']}`];
-                prod = self.products[shop_url]['products'][product_id]
+                prod = self.products[shop_url]['products'][product['id']]
+                diff = jsondiff.diff(
+                    self.create_product_object(product),
+                    self.create_product_object(prod)
+                )
+                print(diff)
+                if diff.items().__len__() <= 2 and diff['updated_at']:
+                    sold_variant = None
+                    if diff['variants']:
+                        check = self.check_for_diff(prod, product)
+                        sold_variant = check['sold_variant']
 
 
 if __name__ == '__main__':
