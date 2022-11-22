@@ -102,7 +102,7 @@ class ProductsTracker:
             self.create_product_object(old_product),
             self.create_product_object(new_product)
         )
-        sold_variant: Union[str: None] = None
+        sold_variant: Union[dict: None] = None
         new_sale: bool = False  # False ?
 
         if diff.items().__len__() <= 2:
@@ -121,16 +121,6 @@ class ProductsTracker:
             'sold_variant': sold_variant
         }
 
-    # async updateLatestSale(shop_url, data, sold_variant) {
-    #             app.shopify.database[shop_url]['products'][`${data['id']}`]['sales'].push({
-    #                 time: data['updated_at'],
-    #                 variant: sold_variant,
-    #                 price: sold_variant ? sold_variant['price'] : data['variants'][0]['price'],
-    #             });
-    #             app.shopify.database[shop_url]['products'][`${data['id']}`]['updated_at'] =
-    #                 data['updated_at'];
-    #         },
-
     def update_latest_sale(self, shop_url: str, data: dict, sold_variant: Union[dict, None]):
         self.products[shop_url]['products'][data['id']]['sales'].append({
             'time': data['updated_at'],
@@ -138,6 +128,113 @@ class ProductsTracker:
             'price': sold_variant['price'] if sold_variant is not None else data['variants'][0]['price'],
         })
         self.products[shop_url]['products'][data['id']]['updated_at'] = data['updated_at']
+
+    #  async onNewSale(shop_url, data, sold_variant) {
+    #             let field_text = '';
+    #             let key_translations = {
+    #                 title: 'Titel',
+    #                 sku: 'SKU',
+    #                 price: 'Preis',
+    #                 compare_at_price: 'Vergleichspreis',
+    #                 position: 'Position',
+    #                 product_id: 'Identifier',
+    #             };
+    #
+    #             const all_together = this.getProductSalesAmount(
+    #                 shop_url,
+    #                 data['id'],
+    #                 sold_variant ? sold_variant['product_id'] : undefined
+    #             );
+    #
+    #             if (sold_variant) {
+    #                 ['title', 'sku', 'compare_at_price', 'price'].forEach((key) => {
+    #                     if (sold_variant[key]) {
+    #                         field_text += `**${key_translations[key]}**: \`\`${sold_variant[key]}\`\`\n`;
+    #                     }
+    #                 });
+    #             }
+    #
+    #             const summary_shop = await this.getShopSalesAmount(shop_url);
+    #
+    #             const field = sold_variant
+    #                 ? {
+    #                     name: 'Variante:',
+    #                     value: field_text,
+    #                     inline: true,
+    #                 }
+    #                 : undefined;
+    #
+    #             const field2 = sold_variant
+    #                 ? {
+    #                     name: 'Statistiken (Variante):',
+    #                     value: `**Geschätzte Einnahmen:** \`\`${all_together['variant']}\`\`\n**Verkauft:** \`\`${all_together['variant_quantity']}x\`\``,
+    #                     inline: true,
+    #                 }
+    #                 : undefined;
+    #
+    #             const field3 = {
+    #                 name: 'Statistiken (Shop):',
+    #                 value: `**Geschätzte Einnahmen:** \`\`${summary_shop}\`\``,
+    #                 inline: false,
+    #             };
+    #
+    #             const embed = app.utils.discord.createEmbed('info', {
+    #                 title: `Neuer Verkauf [${shop_url}]`,
+    #                 description: `[Klicke hier um auf die Produktseite zu gelangen](https://${shop_url}/products/${data['handle']
+    #                 })\n**Produkt:** \`\`${data['title']
+    #                 }\`\`\n**Verkauft um:** \`\`${app.utils.time.getDateStringServ(
+    #                     data['updated_at']
+    #                 )}\`\`\n**Tracker gestartet um:** \`\`${app.utils.time.getDateStringServ(
+    #                     app.shopify.database.started_at
+    #                 )}\`\`\n**Preis:** ${data['variants'][0]['compare_at_price']
+    #                     ? `${data['variants'][0]['price']} ~~${data['variants'][0]['compare_at_price']}~~`
+    #                     : `\`\`${data['variants'][0]['price']}\`\``
+    #                 }`,
+    #
+    #                 thumbnail: {
+    #                     url: sold_variant
+    #                         ? sold_variant['featured_image']
+    #                             ? this.findImageById(data.images, sold_variant['featured_image']['id'])
+    #                             : data['images'][0]['src']
+    #                         : data['images'][0]['src'],
+    #                 },
+    #                 fields: sold_variant
+    #                     ? [
+    #                         field,
+    #                         {
+    #                             name: 'Statistiken  (Produkt):',
+    #                             value: `**Einnahmen:** \`\`${all_together['product']}\`\`\n**Verkauft:** \`\`${all_together['product_quantity']}x\`\``,
+    #                             inline: true,
+    #                         },
+    #                         field2,
+    #                         field3,
+    #                     ]
+    #                     : [
+    #                         {
+    #                             name: 'Statistiken (Produkt):',
+    #                             value: `**Einnahmen:** \`\`${all_together['product']}\`\`\n**Verkauft:** \`\`${all_together['product_quantity']}x\`\``,
+    #                             inline: true,
+    #                         },
+    #                         field3
+    #                     ],
+    #                 color: 3066993,
+    #             });
+    #
+    #             await app.modules.axios.post(
+    #                 app.shopify.config['webhooks'][shop_url]
+    #                     ? app.shopify.config['webhooks'][shop_url]
+    #                     : app.shopify.config['webhooks']['default'],
+    #                 JSON.stringify({embeds: [embed]}),
+    #                 {
+    #                     headers: {
+    #                         'Content-type': 'application/json',
+    #                     },
+    #                 }
+    #             );
+    #         },
+
+    def on_new_sale(self, shop_url: str, product: dict, sold_variant: [dict, None]):
+        pass
 
     def check_for_sales(self, shop_url: str):
         data: dict = requests.get(self.product_info(shop_url)).json()
@@ -155,11 +252,15 @@ class ProductsTracker:
                     self.create_product_object(prod)
                 )
                 if diff.items().__len__() <= 2 and diff['updated_at']:
-                    sold_variant: Union[str, None] = None
+                    sold_variant: Union[dict, None] = None
                     if diff['variants']:
                         check: dict = self.check_for_diff(prod, product)
                         sold_variant = check['sold_variant']
                     self.update_latest_sale(shop_url, product, sold_variant)
+                    print(f"{shop_url} {self.products[shop_url]['products'][product['id']]['sales'].__len__()} "
+                          f"New sale -> {product['title']}")
+
+                    self.on_new_sale(shop_url, product, sold_variant)
 
 
 if __name__ == '__main__':
