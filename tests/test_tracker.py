@@ -85,13 +85,13 @@ class ProductsTracker:
         sys.stdout.write(f'Removed ${shop_url} from memory database.\n')
 
     def check_for_new_products(self, shop_url: str, data: dict):
-        list_of_all_values = [value for elem in self.products[shop_url]['products'] for value in elem.values()]
         for product in data['products']:
-            if not product['id'] in list_of_all_values:
+            if not product['id'] in self.products[shop_url]['products'].keys():
                 product_obj = self.create_product_object(product)
                 self.products[shop_url]['products'][product_obj['id']] = product_obj
                 print(f"Added new product ${product_obj['title']} from ${shop_url} to memory database.\n")
-            break
+            else:
+                print(f"Product ${product['title']} from ${shop_url} already exists in memory database.\n")
 
     def get_latest_sale(self, shop_url: str, product_id: int) -> Union[str, None]:
         for key, value in self.products[shop_url]['products'].items():

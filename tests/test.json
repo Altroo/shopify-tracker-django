@@ -3,11 +3,14 @@
     {
       'id': 8046315340007,
       'title': 'The Fruity Bullet - Portable Blender',
-      'vendor': 'FruityBullet',
       'handle': 'development-the-fruity-bullet',
+      'body_html': '<div class="shogun-root" data-shogun-id="62c573f4e5716e00ef5e0f28" data-shogun-site-id="0a7773b0-21bc-4a37-ad9e-bb7f9f505405" data-shogun-page-id="62c573f4e5716e00ef5e0f28" data-shogun-page-version-id="62c573f4e5716e00ef5e0f27" data-shogun-platform-type="shopify" data-shogun-variant-id="62c573f4e5716e00ef5e0f29" data-region="main">\n  \n\n<div id="s-faf01a90-b4f2-42a3-911e-0c204cd21164" class="shg-c  ">\n  <h3 class="ProdHead">The Portable Smoothie Maker That Will Change The Way You Blend Forever</h3>\n<ul class="checklist">\n<li>\n<strong>SLIM &amp; SLEEK DESIGN</strong> - Compact and aesthetic design makes it easy to carry around</li>\n<li>\n<strong>BUILT IN BATTERY</strong> - Enjoy up to 15 blends on a single charge</li>\n<li>\n<strong>SILENT BLADE TECHNOLOGY</strong> - Our blender offers you a silent solution for when it comes to your blending needs</li>\n<li>\n<strong>FROZEN FRUIT COMPATIBLE</strong> - The ability to blend frozen fruits so you can create a fresh cold smoothie</li>\n<li>\n<strong>DURABLE &amp; DROP PROOF</strong> - Made with BPA free plastic, we offer an aesthetic look without sacrificing durability</li>\n</ul>\n<p><span class="a-list-item" data-mce-fragment="1"><img alt="" src="https://cdn.shopify.com/s/files/1/0636/0940/5671/files/smoothie_480x480_0a144e7b-e1f7-4d7a-821b-b24f57b0560e_480x480.gif?v=1647958207" style="display: block; margin-left: auto; margin-right: auto;" data-mce-style="display: block; margin-left: auto; margin-right: auto;"></span></p>\n\n</div>\n\n\n</div>\n',
       'published_at': '2022-09-05T08:22:18+01:00',
       'created_at': '2022-07-29T08:13:21+01:00',
       'updated_at': '2022-11-19T08:00:26+00:00',
+      'vendor': 'FruityBullet',
+      'product_type': 'Portable Blender Bottle',
+      'tags': [],
       'variants': [
         {
           'id': 44149925871847,
@@ -221,20 +224,22 @@
             'Pink'
           ]
         }
-      ],
-      'tags': [],
-      'product_type': 'Portable Blender Bottle',
-      'body_html': '<div class="shogun-root" data-shogun-id="62c573f4e5716e00ef5e0f28" data-shogun-site-id="0a7773b0-21bc-4a37-ad9e-bb7f9f505405" data-shogun-page-id="62c573f4e5716e00ef5e0f28" data-shogun-page-version-id="62c573f4e5716e00ef5e0f27" data-shogun-platform-type="shopify" data-shogun-variant-id="62c573f4e5716e00ef5e0f29" data-region="main">\n  \n\n<div id="s-faf01a90-b4f2-42a3-911e-0c204cd21164" class="shg-c  ">\n  <h3 class="ProdHead">The Portable Smoothie Maker That Will Change The Way You Blend Forever</h3>\n<ul class="checklist">\n<li>\n<strong>SLIM &amp; SLEEK DESIGN</strong> - Compact and aesthetic design makes it easy to carry around</li>\n<li>\n<strong>BUILT IN BATTERY</strong> - Enjoy up to 15 blends on a single charge</li>\n<li>\n<strong>SILENT BLADE TECHNOLOGY</strong> - Our blender offers you a silent solution for when it comes to your blending needs</li>\n<li>\n<strong>FROZEN FRUIT COMPATIBLE</strong> - The ability to blend frozen fruits so you can create a fresh cold smoothie</li>\n<li>\n<strong>DURABLE &amp; DROP PROOF</strong> - Made with BPA free plastic, we offer an aesthetic look without sacrificing durability</li>\n</ul>\n<p><span class="a-list-item" data-mce-fragment="1"><img alt="" src="https://cdn.shopify.com/s/files/1/0636/0940/5671/files/smoothie_480x480_0a144e7b-e1f7-4d7a-821b-b24f57b0560e_480x480.gif?v=1647958207" style="display: block; margin-left: auto; margin-right: auto;" data-mce-style="display: block; margin-left: auto; margin-right: auto;"></span></p>\n\n</div>\n\n\n</div>\n',
-      'sales': []
+      ]
     },
     {
       'id': 8055567745255,
       'title': 'Fruity Bullet Bottom Lid',
-      'vendor': 'Fruity Bullet',
       'handle': 'fruity-bullet-bottom-lid',
+      'body_html': '<div class="col-12 order-3">\n<p class="mb-3 text-greyish-brown">Keep your smoothies sealed fresh in their cups with a set of airtight twist-on lids.<span>\xa0</span><strong>Cups not included.</strong></p>\n</div>',
       'published_at': '2022-08-02T16:11:48+01:00',
       'created_at': '2022-08-02T16:11:43+01:00',
       'updated_at': '2022-11-21T22:01:20+00:00',
+      'vendor': 'Fruity Bullet',
+      'product_type': '',
+      'tags': [
+        'accessories',
+        'main'
+      ],
       'variants': [
         {
           'id': 44192295780583,
@@ -352,23 +357,22 @@
             'Pink'
           ]
         }
-      ],
-      'tags': [
-        'accessories',
-        'main'
-      ],
-      'product_type': '',
-      'body_html': '<div class="col-12 order-3">\n<p class="mb-3 text-greyish-brown">Keep your smoothies sealed fresh in their cups with a set of airtight twist-on lids.<span>\xa0</span><strong>Cups not included.</strong></p>\n</div>',
-      'sales': []
+      ]
     },
     {
       'id': 8055534452967,
       'title': 'Fruity Bullet Wireless Charger',
-      'vendor': 'Fruity Bullet',
       'handle': 'fruity-bullet-wireless-charger',
+      'body_html': "Get 20+ blends from just one hour of charging, and the best part? It's totally wireless! Just plug the Fruity Bullet wireless charger into a USB port, place your blender on top and charge away.",
       'published_at': '2022-08-02T15:46:55+01:00',
       'created_at': '2022-08-02T15:43:52+01:00',
       'updated_at': '2022-11-21T20:31:08+00:00',
+      'vendor': 'Fruity Bullet',
+      'product_type': '',
+      'tags': [
+        'accessories',
+        'main'
+      ],
       'variants': [
         {
           'id': 44192038879463,
@@ -505,23 +509,21 @@
             'Pink'
           ]
         }
-      ],
-      'tags': [
-        'accessories',
-        'main'
-      ],
-      'product_type': '',
-      'body_html': "Get 20+ blends from just one hour of charging, and the best part? It's totally wireless! Just plug the Fruity Bullet wireless charger into a USB port, place your blender on top and charge away.",
-      'sales': []
+      ]
     },
     {
       'id': 7967552405735,
       'title': 'Fruity Bullet Bundle',
-      'vendor': 'Fruity Bullet',
       'handle': 'fruity-bullet-bundle',
+      'body_html': '',
       'published_at': '2022-06-28T09:35:16+01:00',
       'created_at': '2022-06-28T09:34:11+01:00',
       'updated_at': '2022-11-21T12:30:25+00:00',
+      'vendor': 'Fruity Bullet',
+      'product_type': '',
+      'tags': [
+        'main'
+      ],
       'variants': [
         {
           'id': 43832147640551,
@@ -630,22 +632,19 @@
             'Pink'
           ]
         }
-      ],
-      'tags': [
-        'main'
-      ],
-      'product_type': '',
-      'body_html': '',
-      'sales': []
+      ]
     },
     {
       'id': 7951598649575,
       'title': 'Fruity Bullet Smoothie E-Book - Volume 1',
-      'vendor': 'Fruity Bullet',
       'handle': 'fruity-book-smoothie-book-volume-1',
+      'body_html': '<p><meta charset="utf-8"><span data-mce-fragment="1">Enjoy the freedom to create whatever you like—wherever you are—with 10 original recipes specially created for your Fruity Bullet.\xa0</span></p>\n<p>Volume 1 of the Fruity Bullet smoothie book is a bitesized way to reinvent your routine. Boost your workout. Indulge in a drinkable dessert. Breakfast faster. Or simply create the fuel to feel good.<br></p>\n<p>Rejoice in saving the planet thanks to this eBook, which will be\xa0delivered instantly by email.<br></p>',
       'published_at': '2022-06-22T14:16:02+01:00',
       'created_at': '2022-06-22T06:30:14+01:00',
-      'updated_at': '2022-11-21T22:00:59+00:00',
+      'updated_at': '2022-11-22T10:05:34+00:00',
+      'vendor': 'Fruity Bullet',
+      'product_type': '',
+      'tags': [],
       'variants': [
         {
           'id': 43770103038183,
@@ -664,7 +663,7 @@
           'position': 1,
           'product_id': 7951598649575,
           'created_at': '2022-06-22T06:30:14+01:00',
-          'updated_at': '2022-11-21T21:56:30+00:00'
+          'updated_at': '2022-11-22T10:04:25+00:00'
         }
       ],
       'images': [
@@ -688,20 +687,21 @@
             'Default Title'
           ]
         }
-      ],
-      'tags': [],
-      'product_type': '',
-      'body_html': '<p><meta charset="utf-8"><span data-mce-fragment="1">Enjoy the freedom to create whatever you like—wherever you are—with 10 original recipes specially created for your Fruity Bullet.\xa0</span></p>\n<p>Volume 1 of the Fruity Bullet smoothie book is a bitesized way to reinvent your routine. Boost your workout. Indulge in a drinkable dessert. Breakfast faster. Or simply create the fuel to feel good.<br></p>\n<p>Rejoice in saving the planet thanks to this eBook, which will be\xa0delivered instantly by email.<br></p>',
-      'sales': []
+      ]
     },
     {
       'id': 7693939278055,
       'title': 'The Fruity Bullet',
-      'vendor': 'FruityBullet',
       'handle': 'the-fruity-bullet',
+      'body_html': '<div data-region="main" data-shogun-variant-id="62c573f4e5716e00ef5e0f29" data-shogun-platform-type="shopify" data-shogun-page-version-id="62c573f4e5716e00ef5e0f27" data-shogun-page-id="62c573f4e5716e00ef5e0f28" data-shogun-site-id="0a7773b0-21bc-4a37-ad9e-bb7f9f505405" data-shogun-id="62c573f4e5716e00ef5e0f28" class="shogun-root">\n<div class="shg-c" id="s-faf01a90-b4f2-42a3-911e-0c204cd21164">\n<h3 class="ProdHead">The Portable Smoothie Maker That Will Change The Way You Blend Forever</h3>\n<ul class="checklist">\n<li>\n<strong>SLIM &amp; SLEEK DESIGN</strong> - Compact and aesthetic design makes it easy to carry around</li>\n<li>\n<strong>BUILT IN BATTERY</strong> - Enjoy up to 15 blends on a single charge</li>\n<li>\n<strong>SILENT BLADE TECHNOLOGY</strong> - Our blender offers you a silent solution for when it comes to your blending needs</li>\n<li>\n<strong>FROZEN FRUIT COMPATIBLE</strong> - The ability to blend frozen fruits so you can create a fresh cold smoothie</li>\n<li>\n<strong>DURABLE &amp; DROP PROOF</strong> - Made with BPA free plastic, we offer an aesthetic look without sacrificing durability</li>\n</ul>\n<p><span data-mce-fragment="1" class="a-list-item"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://cdn.shopify.com/s/files/1/0636/0940/5671/files/smoothie_480x480_0a144e7b-e1f7-4d7a-821b-b24f57b0560e_480x480.gif?v=1647958207" alt="" data-mce-style="display: block; margin-left: auto; margin-right: auto;"></span></p>\n</div>\n</div>',
       'published_at': '2022-03-22T13:51:05+00:00',
       'created_at': '2022-03-22T13:50:57+00:00',
-      'updated_at': '2022-11-21T22:00:47+00:00',
+      'updated_at': '2022-11-22T10:05:30+00:00',
+      'vendor': 'FruityBullet',
+      'product_type': 'Food Mixer & Blender Accessories',
+      'tags': [
+        'main'
+      ],
       'variants': [
         {
           'id': 42766728888551,
@@ -765,7 +765,7 @@
           'position': 2,
           'product_id': 7693939278055,
           'created_at': '2022-03-22T13:55:01+00:00',
-          'updated_at': '2022-11-21T21:28:06+00:00'
+          'updated_at': '2022-11-22T10:04:25+00:00'
         }
       ],
       'images': [
@@ -904,14 +904,7 @@
             'Pink'
           ]
         }
-      ],
-      'tags': [
-        'main'
-      ],
-      'product_type': 'Food Mixer & Blender Accessories',
-      'body_html': '<div data-region="main" data-shogun-variant-id="62c573f4e5716e00ef5e0f29" data-shogun-platform-type="shopify" data-shogun-page-version-id="62c573f4e5716e00ef5e0f27" data-shogun-page-id="62c573f4e5716e00ef5e0f28" data-shogun-site-id="0a7773b0-21bc-4a37-ad9e-bb7f9f505405" data-shogun-id="62c573f4e5716e00ef5e0f28" class="shogun-root">\n<div class="shg-c" id="s-faf01a90-b4f2-42a3-911e-0c204cd21164">\n<h3 class="ProdHead">The Portable Smoothie Maker That Will Change The Way You Blend Forever</h3>\n<ul class="checklist">\n<li>\n<strong>SLIM &amp; SLEEK DESIGN</strong> - Compact and aesthetic design makes it easy to carry around</li>\n<li>\n<strong>BUILT IN BATTERY</strong> - Enjoy up to 15 blends on a single charge</li>\n<li>\n<strong>SILENT BLADE TECHNOLOGY</strong> - Our blender offers you a silent solution for when it comes to your blending needs</li>\n<li>\n<strong>FROZEN FRUIT COMPATIBLE</strong> - The ability to blend frozen fruits so you can create a fresh cold smoothie</li>\n<li>\n<strong>DURABLE &amp; DROP PROOF</strong> - Made with BPA free plastic, we offer an aesthetic look without sacrificing durability</li>\n</ul>\n<p><span data-mce-fragment="1" class="a-list-item"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://cdn.shopify.com/s/files/1/0636/0940/5671/files/smoothie_480x480_0a144e7b-e1f7-4d7a-821b-b24f57b0560e_480x480.gif?v=1647958207" alt="" data-mce-style="display: block; margin-left: auto; margin-right: auto;"></span></p>\n</div>\n</div>',
-      'sales': []
+      ]
     }
-  ],
-  'started_at': 1669066611000
+  ]
 }
