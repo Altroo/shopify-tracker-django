@@ -97,26 +97,54 @@ class ProductsTracker:
             if key == product_id:
                 return value.get('updated_at', None)
 
+    def check_for_diff(self, old_product: dict, new_product: dict):
+        diff = jsondiff.diff(
+            self.create_product_object(old_product),
+            self.create_product_object(new_product)
+        )
+        sold_variant: Union[str: None] = None
+        new_sale: bool = False  # False ?
+
+        if diff.items().__len__() <= 2:
+            if diff['updated_at']:
+                new_sale = True
+                if diff['variants']:
+                    for key, value in old_product['variants'].items:
+                        if value['updated_at'] != new_product['variants'][key]['updated_at']:
+                            sold_variant = new_product['variants'][key]
+                            break
+
+        return {
+            'diff': diff,
+            'new_sale': new_sale,
+            # 'sold_variant': sold_variant if sold_variant is not None else None
+            'sold_variant': sold_variant
+        }
+
+    def update_latest_sale(self, shop_url: str, product: dict, sold_variant: Union[str, None]):
+        pass
+
     def check_for_sales(self, shop_url: str):
         data: dict = requests.get(self.product_info(shop_url)).json()
         self.check_for_new_products(shop_url, data)
 
+        product: dict
         for product in data['products']:
             last_sale: Union[str, None] = self.get_latest_sale(shop_url, product['id'])
             # unecessary to add same variable on both check sides but i'm just translating lol
             if last_sale and product['updated_at'] != last_sale:
                 # const prod = app.shopify.database[shop_url]['products'][`${product['id']}`];
-                prod = self.products[shop_url]['products'][product['id']]
+                prod: dict = self.products[shop_url]['products'][product['id']]
                 diff = jsondiff.diff(
                     self.create_product_object(product),
                     self.create_product_object(prod)
                 )
-                print(diff)
                 if diff.items().__len__() <= 2 and diff['updated_at']:
-                    sold_variant = None
+                    sold_variant: Union[str, None] = None
                     if diff['variants']:
-                        check = self.check_for_diff(prod, product)
+                        check: dict = self.check_for_diff(prod, product)
                         sold_variant = check['sold_variant']
+                    self.update_latest_sale(shop_url, product, sold_variant)
 
 
 if __name__ == '__main__':
