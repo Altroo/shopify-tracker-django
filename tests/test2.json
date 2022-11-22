@@ -1,0 +1,1141 @@
+[
+  {
+    'id': 8046315340007,
+    'title': 'The Fruity Bullet - Portable Blender',
+    'vendor': 'FruityBullet',
+    'handle': 'development-the-fruity-bullet',
+    'published_at': '2022-09-05T08:22:18+01:00',
+    'created_at': '2022-07-29T08:13:21+01:00',
+    'updated_at': '2022-11-19T08:00:26+00:00',
+    'variants': [
+      {
+        'id': 44149925871847,
+        'title': 'White',
+        'option1': 'White',
+        'option2': None,
+        'option3': None,
+        'sku': '',
+        'requires_shipping': True,
+        'taxable': False,
+        'featured_image': {
+          'id': 38917959254247,
+          'product_id': 8046315340007,
+          'position': 1,
+          'created_at': '2022-09-01T17:37:26+01:00',
+          'updated_at': '2022-09-01T17:59:07+01:00',
+          'alt': None,
+          'width': 1080,
+          'height': 1080,
+          'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/test2.jpg?v=1662051547',
+          'variant_ids': [
+            44149925871847
+          ]
+        },
+        'available': True,
+        'price': '46.80',
+        'grams': 45,
+        'compare_at_price': '78.00',
+        'position': 1,
+        'product_id': 8046315340007,
+        'created_at': '2022-07-29T08:13:21+01:00',
+        'updated_at': '2022-11-19T07:57:56+00:00'
+      },
+      {
+        'id': 44149925904615,
+        'title': 'Pink',
+        'option1': 'Pink',
+        'option2': None,
+        'option3': None,
+        'sku': '',
+        'requires_shipping': True,
+        'taxable': False,
+        'featured_image': {
+          'id': 38918272549095,
+          'product_id': 8046315340007,
+          'position': 2,
+          'created_at': '2022-09-01T17:59:05+01:00',
+          'updated_at': '2022-09-01T17:59:07+01:00',
+          'alt': None,
+          'width': 1080,
+          'height': 1080,
+          'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/test6.jpg?v=1662051547',
+          'variant_ids': [
+            44149925904615
+          ]
+        },
+        'available': True,
+        'price': '46.80',
+        'grams': 45,
+        'compare_at_price': '78.00',
+        'position': 2,
+        'product_id': 8046315340007,
+        'created_at': '2022-07-29T08:13:21+01:00',
+        'updated_at': '2022-11-19T07:57:55+00:00'
+      }
+    ],
+    'images': [
+      {
+        'id': 38917959254247,
+        'created_at': '2022-09-01T17:37:26+01:00',
+        'position': 1,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [
+          44149925871847
+        ],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/test2.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38918272549095,
+        'created_at': '2022-09-01T17:59:05+01:00',
+        'position': 2,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [
+          44149925904615
+        ],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/test6.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38713245892839,
+        'created_at': '2022-08-07T13:27:42+01:00',
+        'position': 3,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/2_1d01b56b-571c-4be0-a805-543fa6bd728f.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38639678914791,
+        'created_at': '2022-07-29T08:13:29+01:00',
+        'position': 4,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/2_eb32fd91-b7f6-44de-a7b0-7d9912629049.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38639678849255,
+        'created_at': '2022-07-29T08:13:28+01:00',
+        'position': 5,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/3_0a89d3ba-7b4e-4c7f-b593-a519adc1d4dd.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38713245925607,
+        'created_at': '2022-08-07T13:27:42+01:00',
+        'position': 6,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/4_9ed49175-0421-465f-866c-9fc575ca7729.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38713245958375,
+        'created_at': '2022-08-07T13:27:42+01:00',
+        'position': 7,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/3_1d5962c7-0e31-439d-9be4-da33bbe232a1.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38639678882023,
+        'created_at': '2022-07-29T08:13:29+01:00',
+        'position': 8,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/1_30887a49-09e7-48b5-929d-74113e5c355f.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38693082071271,
+        'created_at': '2022-08-04T20:27:26+01:00',
+        'position': 9,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/274323750_675701343610322_2460337153206152158_n_2386a497-c696-471c-95f6-34d74fb66c58.jpg?v=1662051547',
+        'width': 1144,
+        'height': 1144
+      },
+      {
+        'id': 38639678947559,
+        'created_at': '2022-07-29T08:13:29+01:00',
+        'position': 10,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/4_a2abf8df-9d33-4a6f-bb63-27fced8edc45.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38639678980327,
+        'created_at': '2022-07-29T08:13:29+01:00',
+        'position': 11,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/5_bfed89d4-0d9c-4a12-98dd-e38752186c00.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38639679013095,
+        'created_at': '2022-07-29T08:13:29+01:00',
+        'position': 12,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/6_92989426-1568-4b66-9207-43b709f17420.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      }
+    ],
+    'options': [
+      {
+        'name': 'Color',
+        'position': 1,
+        'values': [
+          'White',
+          'Pink'
+        ]
+      }
+    ],
+    'tags': [],
+    'product_type': 'Portable Blender Bottle',
+    'body_html': '<div class="shogun-root" data-shogun-id="62c573f4e5716e00ef5e0f28" data-shogun-site-id="0a7773b0-21bc-4a37-ad9e-bb7f9f505405" data-shogun-page-id="62c573f4e5716e00ef5e0f28" data-shogun-page-version-id="62c573f4e5716e00ef5e0f27" data-shogun-platform-type="shopify" data-shogun-variant-id="62c573f4e5716e00ef5e0f29" data-region="main">\n  \n\n<div id="s-faf01a90-b4f2-42a3-911e-0c204cd21164" class="shg-c  ">\n  <h3 class="ProdHead">The Portable Smoothie Maker That Will Change The Way You Blend Forever</h3>\n<ul class="checklist">\n<li>\n<strong>SLIM &amp; SLEEK DESIGN</strong> - Compact and aesthetic design makes it easy to carry around</li>\n<li>\n<strong>BUILT IN BATTERY</strong> - Enjoy up to 15 blends on a single charge</li>\n<li>\n<strong>SILENT BLADE TECHNOLOGY</strong> - Our blender offers you a silent solution for when it comes to your blending needs</li>\n<li>\n<strong>FROZEN FRUIT COMPATIBLE</strong> - The ability to blend frozen fruits so you can create a fresh cold smoothie</li>\n<li>\n<strong>DURABLE &amp; DROP PROOF</strong> - Made with BPA free plastic, we offer an aesthetic look without sacrificing durability</li>\n</ul>\n<p><span class="a-list-item" data-mce-fragment="1"><img alt="" src="https://cdn.shopify.com/s/files/1/0636/0940/5671/files/smoothie_480x480_0a144e7b-e1f7-4d7a-821b-b24f57b0560e_480x480.gif?v=1647958207" style="display: block; margin-left: auto; margin-right: auto;" data-mce-style="display: block; margin-left: auto; margin-right: auto;"></span></p>\n\n</div>\n\n\n</div>\n',
+    'sales': []
+  },
+  {
+    'id': 8055567745255,
+    'title': 'Fruity Bullet Bottom Lid',
+    'vendor': 'Fruity Bullet',
+    'handle': 'fruity-bullet-bottom-lid',
+    'published_at': '2022-08-02T16:11:48+01:00',
+    'created_at': '2022-08-02T16:11:43+01:00',
+    'updated_at': '2022-11-21T22:01:20+00:00',
+    'variants': [
+      {
+        'id': 44192295780583,
+        'title': 'White',
+        'option1': 'White',
+        'option2': None,
+        'option3': None,
+        'sku': '',
+        'requires_shipping': True,
+        'taxable': True,
+        'featured_image': None,
+        'available': True,
+        'price': '7.99',
+        'grams': 0,
+        'compare_at_price': '12.99',
+        'position': 1,
+        'product_id': 8055567745255,
+        'created_at': '2022-08-02T16:11:43+01:00',
+        'updated_at': '2022-11-21T21:56:31+00:00'
+      },
+      {
+        'id': 44192295747815,
+        'title': 'Pink',
+        'option1': 'Pink',
+        'option2': None,
+        'option3': None,
+        'sku': '',
+        'requires_shipping': True,
+        'taxable': True,
+        'featured_image': None,
+        'available': True,
+        'price': '7.99',
+        'grams': 0,
+        'compare_at_price': '12.99',
+        'position': 2,
+        'product_id': 8055567745255,
+        'created_at': '2022-08-02T16:11:43+01:00',
+        'updated_at': '2022-11-21T20:28:07+00:00'
+      }
+    ],
+    'images': [
+      {
+        'id': 39275171381479,
+        'created_at': '2022-10-10T07:53:20+01:00',
+        'position': 1,
+        'updated_at': '2022-10-10T07:53:36+01:00',
+        'product_id': 8055567745255,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/WhiteLid.webp?v=1665384816',
+        'width': 713,
+        'height': 713
+      },
+      {
+        'id': 39275171414247,
+        'created_at': '2022-10-10T07:53:20+01:00',
+        'position': 2,
+        'updated_at': '2022-10-10T07:53:36+01:00',
+        'product_id': 8055567745255,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/WhiteLid2.webp?v=1665384816',
+        'width': 713,
+        'height': 713
+      },
+      {
+        'id': 39275173052647,
+        'created_at': '2022-10-10T07:53:30+01:00',
+        'position': 3,
+        'updated_at': '2022-10-10T07:56:55+01:00',
+        'product_id': 8055567745255,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/Demonstration.webp?v=1665385015',
+        'width': 713,
+        'height': 713
+      },
+      {
+        'id': 39275170955495,
+        'created_at': '2022-10-10T07:53:15+01:00',
+        'position': 4,
+        'updated_at': '2022-10-10T07:56:58+01:00',
+        'product_id': 8055567745255,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/PinkLid.webp?v=1665385018',
+        'width': 713,
+        'height': 713
+      },
+      {
+        'id': 39275170889959,
+        'created_at': '2022-10-10T07:53:15+01:00',
+        'position': 5,
+        'updated_at': '2022-10-10T07:56:58+01:00',
+        'product_id': 8055567745255,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/PinkLid2.webp?v=1665385018',
+        'width': 713,
+        'height': 713
+      },
+      {
+        'id': 38674185847015,
+        'created_at': '2022-08-02T16:11:43+01:00',
+        'position': 6,
+        'updated_at': '2022-10-10T07:56:58+01:00',
+        'product_id': 8055567745255,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/4.png?v=1665385018',
+        'width': 600,
+        'height': 600
+      }
+    ],
+    'options': [
+      {
+        'name': 'Color',
+        'position': 1,
+        'values': [
+          'White',
+          'Pink'
+        ]
+      }
+    ],
+    'tags': [
+      'accessories',
+      'main'
+    ],
+    'product_type': '',
+    'body_html': '<div class="col-12 order-3">\n<p class="mb-3 text-greyish-brown">Keep your smoothies sealed fresh in their cups with a set of airtight twist-on lids.<span>\xa0</span><strong>Cups not included.</strong></p>\n</div>',
+    'sales': []
+  },
+  {
+    'id': 8055534452967,
+    'title': 'Fruity Bullet Wireless Charger',
+    'vendor': 'Fruity Bullet',
+    'handle': 'fruity-bullet-wireless-charger',
+    'published_at': '2022-08-02T15:46:55+01:00',
+    'created_at': '2022-08-02T15:43:52+01:00',
+    'updated_at': '2022-11-21T20:31:08+00:00',
+    'variants': [
+      {
+        'id': 44192038879463,
+        'title': 'White',
+        'option1': 'White',
+        'option2': None,
+        'option3': None,
+        'sku': '',
+        'requires_shipping': True,
+        'taxable': True,
+        'featured_image': {
+          'id': 39275677352167,
+          'product_id': 8055534452967,
+          'position': 1,
+          'created_at': '2022-10-10T09:09:26+01:00',
+          'updated_at': '2022-10-10T09:09:31+01:00',
+          'alt': None,
+          'width': 713,
+          'height': 713,
+          'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/15_bd60eaba-7118-41e3-b0a7-4f3be.jpg?v=1665389371',
+          'variant_ids': [
+            44192038879463
+          ]
+        },
+        'available': True,
+        'price': '9.99',
+        'grams': 0,
+        'compare_at_price': '14.99',
+        'position': 1,
+        'product_id': 8055534452967,
+        'created_at': '2022-08-02T15:43:52+01:00',
+        'updated_at': '2022-11-21T09:40:31+00:00'
+      },
+      {
+        'id': 44192038912231,
+        'title': 'Pink',
+        'option1': 'Pink',
+        'option2': None,
+        'option3': None,
+        'sku': '',
+        'requires_shipping': True,
+        'taxable': True,
+        'featured_image': {
+          'id': 39275677384935,
+          'product_id': 8055534452967,
+          'position': 2,
+          'created_at': '2022-10-10T09:09:26+01:00',
+          'updated_at': '2022-10-10T09:09:31+01:00',
+          'alt': None,
+          'width': 713,
+          'height': 713,
+          'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/16.jpg?v=1665389371',
+          'variant_ids': [
+            44192038912231
+          ]
+        },
+        'available': True,
+        'price': '9.99',
+        'grams': 0,
+        'compare_at_price': '14.99',
+        'position': 2,
+        'product_id': 8055534452967,
+        'created_at': '2022-08-02T15:43:52+01:00',
+        'updated_at': '2022-11-21T20:28:07+00:00'
+      }
+    ],
+    'images': [
+      {
+        'id': 39275677352167,
+        'created_at': '2022-10-10T09:09:26+01:00',
+        'position': 1,
+        'updated_at': '2022-10-10T09:09:31+01:00',
+        'product_id': 8055534452967,
+        'variant_ids': [
+          44192038879463
+        ],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/15_bd60eaba-7118-41e3-b0a7-4f3be.jpg?v=1665389371',
+        'width': 713,
+        'height': 713
+      },
+      {
+        'id': 39275677384935,
+        'created_at': '2022-10-10T09:09:26+01:00',
+        'position': 2,
+        'updated_at': '2022-10-10T09:09:31+01:00',
+        'product_id': 8055534452967,
+        'variant_ids': [
+          44192038912231
+        ],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/16.jpg?v=1665389371',
+        'width': 713,
+        'height': 713
+      },
+      {
+        'id': 38673971904743,
+        'created_at': '2022-08-02T15:44:10+01:00',
+        'position': 3,
+        'updated_at': '2022-10-10T09:09:29+01:00',
+        'product_id': 8055534452967,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/1_57bdff14-d5e4-4d99-a06c-eb789fcb5bd8.jpg?v=1665389369',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38673972035815,
+        'created_at': '2022-08-02T15:44:10+01:00',
+        'position': 4,
+        'updated_at': '2022-10-10T09:09:29+01:00',
+        'product_id': 8055534452967,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/2_2db75226-f84b-48cc-afb9-d740d14babd2.jpg?v=1665389369',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38673972003047,
+        'created_at': '2022-08-02T15:44:10+01:00',
+        'position': 5,
+        'updated_at': '2022-10-10T09:09:29+01:00',
+        'product_id': 8055534452967,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/3_0a4a8cd2-a5ce-4a51-9c22-51d8eafd8476.jpg?v=1665389369',
+        'width': 1080,
+        'height': 1080
+      }
+    ],
+    'options': [
+      {
+        'name': 'Color',
+        'position': 1,
+        'values': [
+          'White',
+          'Pink'
+        ]
+      }
+    ],
+    'tags': [
+      'accessories',
+      'main'
+    ],
+    'product_type': '',
+    'body_html': "Get 20+ blends from just one hour of charging, and the best part? It's totally wireless! Just plug the Fruity Bullet wireless charger into a USB port, place your blender on top and charge away.",
+    'sales': []
+  },
+  {
+    'id': 7967552405735,
+    'title': 'Fruity Bullet Bundle',
+    'vendor': 'Fruity Bullet',
+    'handle': 'fruity-bullet-bundle',
+    'published_at': '2022-06-28T09:35:16+01:00',
+    'created_at': '2022-06-28T09:34:11+01:00',
+    'updated_at': '2022-11-21T12:30:25+00:00',
+    'variants': [
+      {
+        'id': 43832147640551,
+        'title': 'White / White',
+        'option1': 'White',
+        'option2': 'White',
+        'option3': None,
+        'sku': '',
+        'requires_shipping': True,
+        'taxable': True,
+        'featured_image': None,
+        'available': True,
+        'price': '90.00',
+        'grams': 0,
+        'compare_at_price': '187.20',
+        'position': 1,
+        'product_id': 7967552405735,
+        'created_at': '2022-06-28T09:35:08+01:00',
+        'updated_at': '2022-11-14T03:07:40+00:00'
+      },
+      {
+        'id': 43832147673319,
+        'title': 'White / Pink',
+        'option1': 'White',
+        'option2': 'Pink',
+        'option3': None,
+        'sku': '',
+        'requires_shipping': True,
+        'taxable': True,
+        'featured_image': None,
+        'available': True,
+        'price': '90.00',
+        'grams': 0,
+        'compare_at_price': '187.20',
+        'position': 2,
+        'product_id': 7967552405735,
+        'created_at': '2022-06-28T09:35:08+01:00',
+        'updated_at': '2022-11-20T08:35:10+00:00'
+      },
+      {
+        'id': 43832147706087,
+        'title': 'Pink / White',
+        'option1': 'Pink',
+        'option2': 'White',
+        'option3': None,
+        'sku': '',
+        'requires_shipping': True,
+        'taxable': True,
+        'featured_image': None,
+        'available': True,
+        'price': '90.00',
+        'grams': 0,
+        'compare_at_price': '187.20',
+        'position': 3,
+        'product_id': 7967552405735,
+        'created_at': '2022-06-28T09:35:08+01:00',
+        'updated_at': '2022-11-21T12:25:13+00:00'
+      },
+      {
+        'id': 43832147738855,
+        'title': 'Pink / Pink',
+        'option1': 'Pink',
+        'option2': 'Pink',
+        'option3': None,
+        'sku': '',
+        'requires_shipping': True,
+        'taxable': True,
+        'featured_image': None,
+        'available': True,
+        'price': '90.00',
+        'grams': 0,
+        'compare_at_price': '187.20',
+        'position': 4,
+        'product_id': 7967552405735,
+        'created_at': '2022-06-28T09:35:08+01:00',
+        'updated_at': '2022-11-02T11:23:25+00:00'
+      }
+    ],
+    'images': [
+      {
+        'id': 38345556000999,
+        'created_at': '2022-06-28T09:34:25+01:00',
+        'position': 1,
+        'updated_at': '2022-06-28T09:34:26+01:00',
+        'product_id': 7967552405735,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/White_and_pink-prod_7e7079a7-319d-42ff-8613-106a0848da9a_1800x1800_2.png?v=1656405266',
+        'width': 1000,
+        'height': 1000
+      }
+    ],
+    'options': [
+      {
+        'name': 'Bottle Color 1',
+        'position': 1,
+        'values': [
+          'White',
+          'Pink'
+        ]
+      },
+      {
+        'name': 'Bottle Color 2',
+        'position': 2,
+        'values': [
+          'White',
+          'Pink'
+        ]
+      }
+    ],
+    'tags': [
+      'main'
+    ],
+    'product_type': '',
+    'body_html': '',
+    'sales': []
+  },
+  {
+    'id': 7951598649575,
+    'title': 'Fruity Bullet Smoothie E-Book - Volume 1',
+    'vendor': 'Fruity Bullet',
+    'handle': 'fruity-book-smoothie-book-volume-1',
+    'published_at': '2022-06-22T14:16:02+01:00',
+    'created_at': '2022-06-22T06:30:14+01:00',
+    'updated_at': '2022-11-21T22:00:59+00:00',
+    'variants': [
+      {
+        'id': 43770103038183,
+        'title': 'Default Title',
+        'option1': 'Default Title',
+        'option2': None,
+        'option3': None,
+        'sku': 'SKU-EBOOKV1',
+        'requires_shipping': False,
+        'taxable': True,
+        'featured_image': None,
+        'available': True,
+        'price': '0.00',
+        'grams': 0,
+        'compare_at_price': None,
+        'position': 1,
+        'product_id': 7951598649575,
+        'created_at': '2022-06-22T06:30:14+01:00',
+        'updated_at': '2022-11-21T21:56:30+00:00'
+      }
+    ],
+    'images': [
+      {
+        'id': 38291317063911,
+        'created_at': '2022-06-22T16:51:07+01:00',
+        'position': 1,
+        'updated_at': '2022-06-22T16:51:08+01:00',
+        'product_id': 7951598649575,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/ebook.jpg?v=1655913068',
+        'width': 1080,
+        'height': 1080
+      }
+    ],
+    'options': [
+      {
+        'name': 'Title',
+        'position': 1,
+        'values': [
+          'Default Title'
+        ]
+      }
+    ],
+    'tags': [],
+    'product_type': '',
+    'body_html': '<p><meta charset="utf-8"><span data-mce-fragment="1">Enjoy the freedom to create whatever you like—wherever you are—with 10 original recipes specially created for your Fruity Bullet.\xa0</span></p>\n<p>Volume 1 of the Fruity Bullet smoothie book is a bitesized way to reinvent your routine. Boost your workout. Indulge in a drinkable dessert. Breakfast faster. Or simply create the fuel to feel good.<br></p>\n<p>Rejoice in saving the planet thanks to this eBook, which will be\xa0delivered instantly by email.<br></p>',
+    'sales': []
+  },
+  {
+    'id': 7693939278055,
+    'title': 'The Fruity Bullet',
+    'vendor': 'FruityBullet',
+    'handle': 'the-fruity-bullet',
+    'published_at': '2022-03-22T13:51:05+00:00',
+    'created_at': '2022-03-22T13:50:57+00:00',
+    'updated_at': '2022-11-21T22:00:47+00:00',
+    'variants': [
+      {
+        'id': 42766728888551,
+        'title': 'White',
+        'option1': 'White',
+        'option2': None,
+        'option3': None,
+        'sku': '',
+        'requires_shipping': True,
+        'taxable': False,
+        'featured_image': {
+          'id': 39275649499367,
+          'product_id': 7693939278055,
+          'position': 1,
+          'created_at': '2022-10-10T09:03:46+01:00',
+          'updated_at': '2022-10-10T09:04:04+01:00',
+          'alt': None,
+          'width': 1080,
+          'height': 1080,
+          'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/test2_895c9b24-3cae-4cc0-aef9-615bf83a78cf.jpg?v=1665389044',
+          'variant_ids': [
+            42766728888551
+          ]
+        },
+        'available': True,
+        'price': '46.80',
+        'grams': 0,
+        'compare_at_price': '94.00',
+        'position': 1,
+        'product_id': 7693939278055,
+        'created_at': '2022-03-22T13:55:01+00:00',
+        'updated_at': '2022-11-21T21:56:30+00:00'
+      },
+      {
+        'id': 42766728921319,
+        'title': 'Pink',
+        'option1': 'Pink',
+        'option2': None,
+        'option3': None,
+        'sku': '',
+        'requires_shipping': True,
+        'taxable': False,
+        'featured_image': {
+          'id': 39275649138919,
+          'product_id': 7693939278055,
+          'position': 5,
+          'created_at': '2022-10-10T09:03:46+01:00',
+          'updated_at': '2022-10-10T09:04:04+01:00',
+          'alt': None,
+          'width': 1080,
+          'height': 1080,
+          'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/test6_c8481c6d-aaa9-4bbc-98ad-9ae0b2eb684d.jpg?v=1665389044',
+          'variant_ids': [
+            42766728921319
+          ]
+        },
+        'available': True,
+        'price': '46.80',
+        'grams': 0,
+        'compare_at_price': '94.00',
+        'position': 2,
+        'product_id': 7693939278055,
+        'created_at': '2022-03-22T13:55:01+00:00',
+        'updated_at': '2022-11-21T21:28:06+00:00'
+      }
+    ],
+    'images': [
+      {
+        'id': 39275649499367,
+        'created_at': '2022-10-10T09:03:46+01:00',
+        'position': 1,
+        'updated_at': '2022-10-10T09:04:04+01:00',
+        'product_id': 7693939278055,
+        'variant_ids': [
+          42766728888551
+        ],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/test2_895c9b24-3cae-4cc0-aef9-615bf83a78cf.jpg?v=1665389044',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38750444454119,
+        'created_at': '2022-08-12T08:31:44+01:00',
+        'position': 2,
+        'updated_at': '2022-10-10T09:04:04+01:00',
+        'product_id': 7693939278055,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/2_4dc1f00d-d791-4ea2-b175-5a65590a8e8d.jpg?v=1665389044',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38750444388583,
+        'created_at': '2022-08-12T08:31:45+01:00',
+        'position': 3,
+        'updated_at': '2022-10-10T09:04:04+01:00',
+        'product_id': 7693939278055,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/4_60832d78-19d5-48be-b7e1-f52c50b9343f.jpg?v=1665389044',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38750444486887,
+        'created_at': '2022-08-12T08:31:44+01:00',
+        'position': 4,
+        'updated_at': '2022-10-10T09:04:04+01:00',
+        'product_id': 7693939278055,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/3_ed529afb-cb7a-455c-8c5a-77a8ed24fa5d.jpg?v=1665389044',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 39275649138919,
+        'created_at': '2022-10-10T09:03:46+01:00',
+        'position': 5,
+        'updated_at': '2022-10-10T09:04:04+01:00',
+        'product_id': 7693939278055,
+        'variant_ids': [
+          42766728921319
+        ],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/test6_c8481c6d-aaa9-4bbc-98ad-9ae0b2eb684d.jpg?v=1665389044',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 37355233083623,
+        'created_at': '2022-03-26T13:31:01+00:00',
+        'position': 6,
+        'updated_at': '2022-10-10T09:04:04+01:00',
+        'product_id': 7693939278055,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/3.jpg?v=1665389044',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 37355233312999,
+        'created_at': '2022-03-26T13:31:01+00:00',
+        'position': 7,
+        'updated_at': '2022-10-10T09:04:04+01:00',
+        'product_id': 7693939278055,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/1.jpg?v=1665389044',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 37355233214695,
+        'created_at': '2022-03-26T13:31:01+00:00',
+        'position': 8,
+        'updated_at': '2022-10-10T09:04:04+01:00',
+        'product_id': 7693939278055,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/2.jpg?v=1665389044',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 37355233149159,
+        'created_at': '2022-03-26T13:31:01+00:00',
+        'position': 9,
+        'updated_at': '2022-10-10T09:04:04+01:00',
+        'product_id': 7693939278055,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/4.jpg?v=1665389044',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 37355233116391,
+        'created_at': '2022-03-26T13:31:01+00:00',
+        'position': 10,
+        'updated_at': '2022-10-10T09:04:04+01:00',
+        'product_id': 7693939278055,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/5.jpg?v=1665389044',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 37355233181927,
+        'created_at': '2022-03-26T13:31:01+00:00',
+        'position': 11,
+        'updated_at': '2022-10-10T09:04:04+01:00',
+        'product_id': 7693939278055,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/6.jpg?v=1665389044',
+        'width': 1080,
+        'height': 1080
+      }
+    ],
+    'options': [
+      {
+        'name': 'Color',
+        'position': 1,
+        'values': [
+          'White',
+          'Pink'
+        ]
+      }
+    ],
+    'tags': [
+      'main'
+    ],
+    'product_type': 'Food Mixer & Blender Accessories',
+    'body_html': '<div data-region="main" data-shogun-variant-id="62c573f4e5716e00ef5e0f29" data-shogun-platform-type="shopify" data-shogun-page-version-id="62c573f4e5716e00ef5e0f27" data-shogun-page-id="62c573f4e5716e00ef5e0f28" data-shogun-site-id="0a7773b0-21bc-4a37-ad9e-bb7f9f505405" data-shogun-id="62c573f4e5716e00ef5e0f28" class="shogun-root">\n<div class="shg-c" id="s-faf01a90-b4f2-42a3-911e-0c204cd21164">\n<h3 class="ProdHead">The Portable Smoothie Maker That Will Change The Way You Blend Forever</h3>\n<ul class="checklist">\n<li>\n<strong>SLIM &amp; SLEEK DESIGN</strong> - Compact and aesthetic design makes it easy to carry around</li>\n<li>\n<strong>BUILT IN BATTERY</strong> - Enjoy up to 15 blends on a single charge</li>\n<li>\n<strong>SILENT BLADE TECHNOLOGY</strong> - Our blender offers you a silent solution for when it comes to your blending needs</li>\n<li>\n<strong>FROZEN FRUIT COMPATIBLE</strong> - The ability to blend frozen fruits so you can create a fresh cold smoothie</li>\n<li>\n<strong>DURABLE &amp; DROP PROOF</strong> - Made with BPA free plastic, we offer an aesthetic look without sacrificing durability</li>\n</ul>\n<p><span data-mce-fragment="1" class="a-list-item"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://cdn.shopify.com/s/files/1/0636/0940/5671/files/smoothie_480x480_0a144e7b-e1f7-4d7a-821b-b24f57b0560e_480x480.gif?v=1647958207" alt="" data-mce-style="display: block; margin-left: auto; margin-right: auto;"></span></p>\n</div>\n</div>',
+    'sales': []
+  },
+  {
+    'id': 8046315340007,
+    'title': 'The Fruity Bullet - Portable Blender',
+    'vendor': 'FruityBullet',
+    'handle': 'development-the-fruity-bullet',
+    'published_at': '2022-09-05T08:22:18+01:00',
+    'created_at': '2022-07-29T08:13:21+01:00',
+    'updated_at': '2022-11-19T08:00:26+00:00',
+    'variants': [
+      {
+        'id': 44149925871847,
+        'title': 'White',
+        'option1': 'White',
+        'option2': None,
+        'option3': None,
+        'sku': '',
+        'requires_shipping': True,
+        'taxable': False,
+        'featured_image': {
+          'id': 38917959254247,
+          'product_id': 8046315340007,
+          'position': 1,
+          'created_at': '2022-09-01T17:37:26+01:00',
+          'updated_at': '2022-09-01T17:59:07+01:00',
+          'alt': None,
+          'width': 1080,
+          'height': 1080,
+          'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/test2.jpg?v=1662051547',
+          'variant_ids': [
+            44149925871847
+          ]
+        },
+        'available': True,
+        'price': '46.80',
+        'grams': 45,
+        'compare_at_price': '78.00',
+        'position': 1,
+        'product_id': 8046315340007,
+        'created_at': '2022-07-29T08:13:21+01:00',
+        'updated_at': '2022-11-19T07:57:56+00:00'
+      },
+      {
+        'id': 44149925904615,
+        'title': 'Pink',
+        'option1': 'Pink',
+        'option2': None,
+        'option3': None,
+        'sku': '',
+        'requires_shipping': True,
+        'taxable': False,
+        'featured_image': {
+          'id': 38918272549095,
+          'product_id': 8046315340007,
+          'position': 2,
+          'created_at': '2022-09-01T17:59:05+01:00',
+          'updated_at': '2022-09-01T17:59:07+01:00',
+          'alt': None,
+          'width': 1080,
+          'height': 1080,
+          'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/test6.jpg?v=1662051547',
+          'variant_ids': [
+            44149925904615
+          ]
+        },
+        'available': True,
+        'price': '46.80',
+        'grams': 45,
+        'compare_at_price': '78.00',
+        'position': 2,
+        'product_id': 8046315340007,
+        'created_at': '2022-07-29T08:13:21+01:00',
+        'updated_at': '2022-11-19T07:57:55+00:00'
+      }
+    ],
+    'images': [
+      {
+        'id': 38917959254247,
+        'created_at': '2022-09-01T17:37:26+01:00',
+        'position': 1,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [
+          44149925871847
+        ],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/test2.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38918272549095,
+        'created_at': '2022-09-01T17:59:05+01:00',
+        'position': 2,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [
+          44149925904615
+        ],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/test6.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38713245892839,
+        'created_at': '2022-08-07T13:27:42+01:00',
+        'position': 3,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/2_1d01b56b-571c-4be0-a805-543fa6bd728f.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38639678914791,
+        'created_at': '2022-07-29T08:13:29+01:00',
+        'position': 4,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/2_eb32fd91-b7f6-44de-a7b0-7d9912629049.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38639678849255,
+        'created_at': '2022-07-29T08:13:28+01:00',
+        'position': 5,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/3_0a89d3ba-7b4e-4c7f-b593-a519adc1d4dd.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38713245925607,
+        'created_at': '2022-08-07T13:27:42+01:00',
+        'position': 6,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/4_9ed49175-0421-465f-866c-9fc575ca7729.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38713245958375,
+        'created_at': '2022-08-07T13:27:42+01:00',
+        'position': 7,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/3_1d5962c7-0e31-439d-9be4-da33bbe232a1.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38639678882023,
+        'created_at': '2022-07-29T08:13:29+01:00',
+        'position': 8,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/1_30887a49-09e7-48b5-929d-74113e5c355f.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38693082071271,
+        'created_at': '2022-08-04T20:27:26+01:00',
+        'position': 9,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/274323750_675701343610322_2460337153206152158_n_2386a497-c696-471c-95f6-34d74fb66c58.jpg?v=1662051547',
+        'width': 1144,
+        'height': 1144
+      },
+      {
+        'id': 38639678947559,
+        'created_at': '2022-07-29T08:13:29+01:00',
+        'position': 10,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/4_a2abf8df-9d33-4a6f-bb63-27fced8edc45.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38639678980327,
+        'created_at': '2022-07-29T08:13:29+01:00',
+        'position': 11,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/5_bfed89d4-0d9c-4a12-98dd-e38752186c00.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      },
+      {
+        'id': 38639679013095,
+        'created_at': '2022-07-29T08:13:29+01:00',
+        'position': 12,
+        'updated_at': '2022-09-01T17:59:07+01:00',
+        'product_id': 8046315340007,
+        'variant_ids': [],
+        'src': 'https://cdn.shopify.com/s/files/1/0636/0940/5671/products/6_92989426-1568-4b66-9207-43b709f17420.jpg?v=1662051547',
+        'width': 1080,
+        'height': 1080
+      }
+    ],
+    'options': [
+      {
+        'name': 'Color',
+        'position': 1,
+        'values': [
+          'White',
+          'Pink'
+        ]
+      }
+    ],
+    'tags': [],
+    'product_type': 'Portable Blender Bottle',
+    'body_html': '<div class="shogun-root" data-shogun-id="62c573f4e5716e00ef5e0f28" data-shogun-site-id="0a7773b0-21bc-4a37-ad9e-bb7f9f505405" data-shogun-page-id="62c573f4e5716e00ef5e0f28" data-shogun-page-version-id="62c573f4e5716e00ef5e0f27" data-shogun-platform-type="shopify" data-shogun-variant-id="62c573f4e5716e00ef5e0f29" data-region="main">\n  \n\n<div id="s-faf01a90-b4f2-42a3-911e-0c204cd21164" class="shg-c  ">\n  <h3 class="ProdHead">The Portable Smoothie Maker That Will Change The Way You Blend Forever</h3>\n<ul class="checklist">\n<li>\n<strong>SLIM &amp; SLEEK DESIGN</strong> - Compact and aesthetic design makes it easy to carry around</li>\n<li>\n<strong>BUILT IN BATTERY</strong> - Enjoy up to 15 blends on a single charge</li>\n<li>\n<strong>SILENT BLADE TECHNOLOGY</strong> - Our blender offers you a silent solution for when it comes to your blending needs</li>\n<li>\n<strong>FROZEN FRUIT COMPATIBLE</strong> - The ability to blend frozen fruits so you can create a fresh cold smoothie</li>\n<li>\n<strong>DURABLE &amp; DROP PROOF</strong> - Made with BPA free plastic, we offer an aesthetic look without sacrificing durability</li>\n</ul>\n<p><span class="a-list-item" data-mce-fragment="1"><img alt="" src="https://cdn.shopify.com/s/files/1/0636/0940/5671/files/smoothie_480x480_0a144e7b-e1f7-4d7a-821b-b24f57b0560e_480x480.gif?v=1647958207" style="display: block; margin-left: auto; margin-right: auto;" data-mce-style="display: block; margin-left: auto; margin-right: auto;"></span></p>\n\n</div>\n\n\n</div>\n',
+    'sales': []
+  }
+]

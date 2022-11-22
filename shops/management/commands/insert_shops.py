@@ -1,23 +1,32 @@
 import sys
 from django.core.management import BaseCommand
-# from shops.models import Shops
+from shops.models import Shops
 from csv import reader
 from os import path
 from django.db.utils import IntegrityError
+import requests
+from requests.exceptions import SSLError, ConnectionError
 
 
 class InsertShops:
     parent_file_dir = path.abspath(path.join(path.dirname(__file__), "../../.."))
 
     def insert(self):
-        with open(self.parent_file_dir + '/csv_data/categories.csv', 'r+', encoding='UTF8') as f:
-            csv_reader = reader(f, delimiter=',')
+        with open(self.parent_file_dir + '/csv_data/shops_list.csv', 'r+', encoding='UTF8') as f:
+            csv_reader = reader(f)
             for row in csv_reader:
+                url = 'https://' + row[0]
+                status = False
                 try:
-                    pass
-                    # Shops.objects.create(name=row[0])
+                    response = requests.get(url)
+                    status = response.ok
+                except (SSLError, ConnectionError):
+                    print("Skipped due to SSLError, most likely the shop didn't finish setting up the "
+                          "new web address, or 404")
+                try:
+                    Shops.objects.create(shop_url=url, availability=status)
                 except IntegrityError:
-                    continue
+                    print('Skipping shop url already exists.')
 
 
 class Command(BaseCommand):
