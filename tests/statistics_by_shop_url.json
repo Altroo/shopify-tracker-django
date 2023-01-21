@@ -1,0 +1,32 @@
+{
+    "shop_url":"example.com",
+    "tracking_enabled":"if tracking enabled on it or not can be just boolean",
+    "total_sales": 149,
+    "estimated_revenue":8273,
+    "tracking_period": 7,
+    "start_tracking_date":"timestamp_when_tracking_start",
+    "report_date":"time_of_calculation this report which is current time",
+    "daily_reprt":[
+        {
+            "day_date_as_time_stamp_or_date":{
+                "total_sales": 21,
+                "estimate_revenue": 2890
+            }
+        },
+        {
+            "day_date_as_time_stamp_or_date":{
+                "total_sales": 15,
+                "estimated_revenue": 2200
+            }
+        },
+        {
+            "day_date_as_time_stamp_or_date":{
+                "total_sales": 30,
+                "estimate_revenued": 3640
+            }
+        }
+
+    ]
+
+
+}

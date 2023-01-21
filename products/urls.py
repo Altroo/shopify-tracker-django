@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import BlankView
+from .views import ProductsView
 
 app_name = 'products'
 
 urlpatterns = [
     # GET :
-    path('', BlankView.as_view()),
+    path('', ProductsView.as_view()),
 ]

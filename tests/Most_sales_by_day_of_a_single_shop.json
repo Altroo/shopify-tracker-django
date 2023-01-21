@@ -1,0 +1,32 @@
+{
+    "shop_url": "example3.com",
+    "tracking_enabled": "if tracking enabled on it or not can be just boolean",
+    "total_sales": 23,
+    "estimated_revenue": 8273,
+    "products_thats_got_sales": [
+        {
+            "prodcut_title": "title of another product",
+            "prodcuct_id": "id or pk of the product the unique identfifer for it",
+            "product_url": "",
+            "prodct_thumbnail": "",
+            "total_sales": 5,
+            "estimated_revenue": 159
+        },
+        {
+            "prodcut_title": "title of product",
+            "prodcuct_id": "id or pk of the product the unique identfifer for it",
+            "product_url": "",
+            "prodct_thumbnail": "",
+            "total_sales": 5,
+            "estimated_revenue": 159
+        },
+        {
+            "prodcut_title": "title of another product 2",
+            "prodcuct_id": "id or pk of the product the unique identfifer for it",
+            "product_url": "",
+            "prodct_thumbnail": "",
+            "total_sales": 5,
+            "estimated_revenue": 159
+        }
+    ]
+}

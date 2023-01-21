@@ -7,6 +7,4 @@ venv/
 # media/
 shopify_tracker_backend/__pycache__
 shops/__pycache__
-shops/migrations
 products/__pycache__
-products/migrations

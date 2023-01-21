@@ -15,3 +15,14 @@ class Shops(Model):
     class Meta:
         verbose_name = 'Shop'
         verbose_name_plural = 'Shops'
+
+
+class Configs(Model):
+    interval = models.IntegerField(verbose_name='Interval', default=48)
+
+    def __str__(self):
+        return '{}'.format(self.interval)
+
+    class Meta:
+        verbose_name = 'Config'
+        verbose_name_plural = 'Configs'

@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import BlankView
+from .views import ShopView, ConfigsView
 
 app_name = 'shops'
 
 urlpatterns = [
     # GET :
-    path('', BlankView.as_view()),
+    path('', ShopView.as_view()),
+    path('configs/', ConfigsView.as_view()),
 ]
