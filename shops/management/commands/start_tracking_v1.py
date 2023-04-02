@@ -1,23 +1,15 @@
-import os
-from django.core.wsgi import get_wsgi_application
-from django.utils import timezone
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'shopify_tracker_backend.settings')
-application = get_wsgi_application()
-
 from typing import Union
 from django.db.models import QuerySet
-from shops.models import Shops, Configs, Proxies
-from products.models import TopSales
+from shops.models import Shops, Configs
 from os import path
 from time import sleep, mktime
-from random import randrange, choice
+from random import randrange
 import requests
-from requests.exceptions import JSONDecodeError, ConnectionError
 import datetime
 import jsondiff
 from threading import Timer
-from fp.fp import FreeProxy, FreeProxyException
+import sys
+from django.core.management import BaseCommand
 
 
 class ProductsTracker:
@@ -42,59 +34,28 @@ class ProductsTracker:
 
     def load_products(self) -> Union[list[Union[QuerySet, Shops]], None]:
         for shop in self.shops:
-            burned_proxies = []
-            while True:
-                try:
-                    proxy_str_: str = FreeProxy(rand=True, google=True,
-                                                anonym=True, elite=True).get()
-                    schema_, ip_ = proxy_str_.split('://')
-                    proxy_ = {
-                        schema_: ip_
-                    }
-                    if proxy_ in burned_proxies:
-                        continue
-                    # items = list(Proxies.objects.all())
-                    # random_proxy = choice(items)
-                    # proxy_ = {
-                    #     random_proxy.schema: random_proxy.ip
-                    # }
-                    print('proxy 1 : ', proxy_)
-                    # sleep(randrange(1, 3))
-                    try:
-                        response = requests.get(self.product_info(shop.shop_url), proxies=proxy_)
-                        if response.status_code == 404:
-                            shop.availability = False
-                            shop.track_enabled = False
-                            shop.save()
-                            print(f"Link {shop.shop_url} returned 404, setting db tracked & availability to False.")
-                            break
-                        else:
-                            try:
-                                response = response.json()
-                                started_at = self.date_time_milliseconds(datetime.datetime.utcnow())
-                                products = response['products'] if response['products'] else []
-                                new_obj = {
-                                    'products': {},
-                                    'started_at': started_at,
-                                }
-                                for value in products:
-                                    product_obj = self.create_product_object(value)
-                                    new_obj['products'][product_obj['id']] = product_obj
-                                self.products[shop.shop_url] = new_obj
-                                print(f"Added {shop.shop_url} with {self.products[shop.shop_url]['products'].__len__()} "
-                                      f"products to memory database.")
-                                break
-                            except JSONDecodeError:
-                                print(f'Proxy 1 {proxy_} burned trying new proxy')
-                                burned_proxies.append(proxy_)
-                                continue
-                    except ConnectionError:
-                        print(f'Proxy 1 {proxy_} returned connectionError')
-                        burned_proxies.append(proxy_)
-                        continue
-                except FreeProxyException:
-                    print(f'There are no working proxies at this time. repeat')
-                    continue
+            sleep(randrange(1, 10))
+            response = requests.get(self.product_info(shop.shop_url))
+            if response.status_code == 404:
+                shop.availability = False
+                shop.track_enabled = False
+                shop.save()
+                sys.stdout.write(f"Link {shop.shop_url} returned 404, setting db tracked & availability to False.")
+                break
+            else:
+                response = response.json()
+            started_at = self.date_time_milliseconds(datetime.datetime.utcnow())
+            products = response['products'] if response['products'] else []
+            new_obj = {
+                'products': {},
+                'started_at': started_at,
+            }
+            for value in products:
+                product_obj = self.create_product_object(value)
+                new_obj['products'][product_obj['id']] = product_obj
+            self.products[shop.shop_url] = new_obj
+            sys.stdout.write(f"Added {shop.shop_url} with {self.products[shop.shop_url]['products'].__len__()} "
+                             f"products to memory database.")
         return self.shops
 
     @staticmethod
@@ -119,7 +80,7 @@ class ProductsTracker:
     def remove_shop(self, index: int):
         shop_url: str = self.shops[index].shop_url
         del self.shops[index]
-        print(f'Removed {shop_url} from memory database.')
+        sys.stdout.write(f'Removed {shop_url} from memory database.')
         # sys.stdout.write(f'Removed {shop_url} from memory database.\n')
 
     def check_for_new_products(self, shop_url: str, data: dict):
@@ -127,7 +88,7 @@ class ProductsTracker:
             if not product['id'] in self.products[shop_url]['products'].keys():
                 product_obj = self.create_product_object(product)
                 self.products[shop_url]['products'][product_obj['id']] = product_obj
-                print(f"Added new product {product_obj['title']} from {shop_url} to memory database.")
+                sys.stdout.write(f"Added new product {product_obj['title']} from {shop_url} to memory database.")
 
     def get_latest_sale(self, shop_url: str, product_id: int) -> Union[str, None]:
         for key, value in self.products[shop_url]['products'].items():
@@ -200,20 +161,14 @@ class ProductsTracker:
             summary += float(product_sales['product'])
         return summary
 
-    def on_new_sale(self, shop_url: str, data: dict, sold_variant: [dict, None], quantity):
+    def on_new_sale(self, shop_url: str, data: dict, sold_variant: [dict, None]):
         field_text = ''
         all_together = self.get_product_sales_amount(
             shop_url,
             data['id'],
             sold_variant['product_id'] if sold_variant else None
         )
-        variant = ''
-        sku = ''
         if sold_variant:
-            if sold_variant['sku']:
-                sku = sold_variant['sku']
-            if sold_variant['title']:
-                variant = sold_variant['title']
             for key in ['title', 'sku', 'compare_at_price', 'price']:
                 if sold_variant[key]:
                     field_text += f'{key}: {sold_variant[key]} \n '
@@ -237,11 +192,8 @@ class ProductsTracker:
         }
 
         price = data['variants'][0]['price']
-        printed_price = data['variants'][0]['price']
-        compare_at_price = 0
         if data['variants'][0]['compare_at_price']:
-            printed_price = f"{data['variants'][0]['price']} ~~{data['variants'][0]['compare_at_price']}~~"
-            compare_at_price = data['variants'][0]['compare_at_price']
+            price = f"{data['variants'][0]['price']} ~~{data['variants'][0]['compare_at_price']}~~"
 
         url = data['images'][0]['src']
         if sold_variant and sold_variant['featured_image']:
@@ -255,7 +207,7 @@ class ProductsTracker:
                     f"Product : {data['title']} \n "
                     f"Sold at : {self.get_readable_date(data['updated_at'])} \n "
                     f"Tracker started at : {self.get_date_string_serv(self.products[shop_url]['started_at'])} \n "
-                    f"Price : {printed_price} \n ",
+                    f"Price : {price} \n ",
             },
             'thumbnail': {
                 'url': url
@@ -278,20 +230,8 @@ class ProductsTracker:
                 field_3
             ]
         }
-        shop = Shops.objects.get(shop_url=shop_url)
-        TopSales.objects.create(
-            shop=shop,
-            product_title=data['title'],
-            product_url=f"{shop_url}/products/{data['handle']}",
-            variant=variant,
-            thumbnail=url,
-            sku=sku,
-            quantity_sold=quantity,
-            price=price,
-            compare_at_price=compare_at_price,
-            sold_at=datetime.datetime.now(timezone.utc),
-        )
-        print(embed)
+        # /** ** sys.stdout.writes the result that is sent to discord ** **/
+        sys.stdout.write(str(embed))
 
     @staticmethod
     def get_date_string_serv(timestamp: float) -> str:
@@ -301,69 +241,56 @@ class ProductsTracker:
     def get_readable_date(date: str) -> str:
         return f"{str(datetime.datetime.strptime(date[0:-6], '%Y-%m-%dT%H:%M:%S'))}"
 
-    def check_for_sales(self, shop_url: str, proxy_: dict):
-        print(f'Check for sales called for {shop_url} with proxy {proxy_}')
-        response = requests.get(self.product_info(shop_url), proxies=proxy_)
-        try:
-            data = response.json()
-            self.check_for_new_products(shop_url, data)
-            product: dict
-            no_products_yet = False
-            for product in data['products']:
-                last_sale: Union[str, None] = self.get_latest_sale(shop_url, product['id'])
-                if last_sale and product['updated_at'] != last_sale:
-                    prod: dict = self.products[shop_url]['products'][product['id']]
-                    diff = jsondiff.diff(
-                        self.create_product_object(product),
-                        self.create_product_object(prod)
-                    )
-                    if diff.items().__len__() <= 2 and diff['updated_at']:
-                        sold_variant: Union[dict, None] = None
-                        if 'variants' in diff.keys():
-                            check: dict = self.check_for_diff(prod, product)
-                            sold_variant = check['sold_variant']
-                        self.update_latest_sale(shop_url, product, sold_variant)
-                        print(
-                            f"{shop_url} - just sold : "
-                            f"{self.products[shop_url]['products'][product['id']]['sales'].__len__()} \n"
-                            f"New sale -> {product['title']}")
-                        quantity = self.products[shop_url]['products'][product['id']]['sales'].__len__()
-                        no_products_yet = True
-                        self.on_new_sale(shop_url, product, sold_variant, quantity)
-            if not no_products_yet:
-                print(f'{shop_url} has no new sales yet.')
-        except Exception as e:
-            print(f'Error at {shop_url}: ', e)
+    def check_for_sales(self, shop_url: str):
+        data: dict = requests.get(self.product_info(shop_url)).json()
+        self.check_for_new_products(shop_url, data)
+
+        product: dict
+        for product in data['products']:
+            last_sale: Union[str, None] = self.get_latest_sale(shop_url, product['id'])
+            # unecessary to add same variable on both check sides but i'm just translating lol
+            if last_sale and product['updated_at'] != last_sale:
+                prod: dict = self.products[shop_url]['products'][product['id']]
+                diff = jsondiff.diff(
+                    self.create_product_object(product),
+                    self.create_product_object(prod)
+                )
+                if diff.items().__len__() <= 2 and diff['updated_at']:
+                    sold_variant: Union[dict, None] = None
+                    if 'variants' in diff.keys():
+                        check: dict = self.check_for_diff(prod, product)
+                        sold_variant = check['sold_variant']
+                    self.update_latest_sale(shop_url, product, sold_variant)
+                    sys.stdout.write(
+                        f"{shop_url} - just sold : "
+                        f"{self.products[shop_url]['products'][product['id']]['sales'].__len__()} \n"
+                        f"New sale -> {product['title']}")
+
+                    self.on_new_sale(shop_url, product, sold_variant)
 
 
-if __name__ == '__main__':
-    products_tracker = ProductsTracker()
-    shops = products_tracker.track()
-    items = list(Proxies.objects.all())
+class Command(BaseCommand):
+    help = 'Tracking Products'
 
-    def set_interval(func, sec, shop_url, proxy_):
-        def func_wrapper():
-            set_interval(func, sec, shop_url, proxy_)
-            func(shop_url, proxy_)
+    def handle(self, *args, **options):
+        sys.stdout.write(f'Start Tracking Available & tracked shops.\n')
+        self.track()
+        sys.stdout.write('\n')
 
-        t = Timer(sec, func_wrapper)
-        t.start()
-        return t
+    @staticmethod
+    def track():
+        products_tracker = ProductsTracker()
+        shops = products_tracker.track()
 
+        def set_interval(func, sec, shop_url):
+            def func_wrapper():
+                set_interval(func, sec, shop_url)
+                func(shop_url)
 
-    interval = Configs.objects.all().first().interval
-    used_proxies = []
-    for shop_ in shops:
-        while True:
-            random_proxy = choice(items)
-            if random_proxy not in used_proxies:
-                used_proxies.append(random_proxy)
-                break
-            else:
-                continue
-        proxy = {
-            random_proxy.schema: random_proxy.ip
-        }
-        print(f'Trying proxy 2 : {proxy}')
-        set_interval(products_tracker.check_for_sales, interval, shop_.shop_url, proxy)
-        sleep(randrange(5, 10))
+            t = Timer(sec, func_wrapper)
+            t.start()
+            return t
+
+        interval = Configs.objects.all().first().interval
+        for shop_ in shops:
+            set_interval(products_tracker.check_for_sales, interval, shop_.shop_url)

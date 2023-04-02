@@ -5,11 +5,9 @@ django.setup()
 
 from shops.models import Shops
 import urllib.request
-from os import path
 import requests
 from threading import Thread
-from requests.exceptions import SSLError, ConnectionError, \
-    ChunkedEncodingError, ReadTimeout, TooManyRedirects, ContentDecodingError, InvalidURL
+from requests.exceptions import RequestException
 from time import sleep
 from django.core.paginator import Paginator
 
@@ -24,9 +22,7 @@ class Styles:
     ]
 
 
-class InsertShops(Thread):
-    current_file_dir = path.dirname(path.abspath(__file__))
-
+class CheckDeadLinks(Thread):
     def __init__(self, color, threads, paginated):
         Thread.__init__(self)
         self.threads = threads
@@ -38,30 +34,22 @@ class InsertShops(Thread):
             ids_list = []
             for id_ in self.paginated.page(int(self.color + 1)).object_list:
                 ids_list.append(id_.pk)
-            shops = Shops.objects.filter(id__in=ids_list, checked=False).order_by('id')
+            shops = Shops.objects.filter(id__in=ids_list, availability=False).order_by('id')
             for shop in shops:
-                if not shop.checked:
+                if not shop.availability:
                     try:
-                        try:
-                            response = requests.get(shop.shop_url, proxies=urllib.request.getproxies())
-                            status = response.ok
-                            shop.availability = status
-                            shop.track_enabled = status
-                            shop.checked = True
+                        response = requests.get(shop.shop_url, proxies=urllib.request.getproxies())
+                        if response.status_code == 404 or response.status_code == 402:
+                            shop.delete()
+                            print(Styles.colors[self.color] + shop.shop_url + ' Deleted', '\033[0m')
+                        elif response.ok:
+                            shop.availability = True
+                            shop.track_enabled = True
                             shop.save()
                             print(Styles.colors[self.color] + shop.shop_url + ' Response ok', '\033[0m')
-                        except (TimeoutError, ChunkedEncodingError, ReadTimeout, TooManyRedirects,
-                                ContentDecodingError, InvalidURL):
-                            print(Styles.colors[self.color] + shop.shop_url +
-                                  " Skipped due to Connection Error, or 404", '\033[0m')
-                    except (SSLError, ConnectionError):
-                        print(Styles.colors[self.color] + shop.shop_url +
-                              " Skipped due to SSLError, most likely the shop didn't finish setting up the "
-                              "new web address, or 404", '\033[0m')
-                        shop.availability = False
-                        shop.track_enabled = False
-                        shop.checked = True
-                        shop.save()
+                    except RequestException:
+                        print(Styles.colors[self.color] + shop.shop_url + ' Request Exception Deleted', '\033[0m')
+                        shop.delete()
                 else:
                     print(Styles.colors[self.color] + shop.shop_url + " Was checked by another thread", '\033[0m')
 
@@ -89,12 +77,9 @@ def main():
             continue
         else:
             break
-    shops = Shops.objects.filter(checked=False).order_by('id')
+    shops = Shops.objects.filter(availability=False).order_by('id')
     paginated = Paginator(shops, threads)
-    print(paginated.count)
-    print(paginated.num_pages)
-    print(paginated.page_range)
-    bots = [InsertShops(x, threads, paginated) for x in range(0, threads)]
+    bots = [CheckDeadLinks(x, threads, paginated) for x in range(0, threads)]
     for bot in bots:
         bot.start()
         sleep(2)

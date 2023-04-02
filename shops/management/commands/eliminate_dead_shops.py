@@ -3,72 +3,125 @@ from django.db.models import QuerySet
 from shops.models import Shops, Configs
 from products.models import Products
 from os import path
-from time import sleep, mktime
-from random import randrange
+from time import mktime, sleep
+from threading import Thread
+# from random import randrange
 import requests
+from requests.exceptions import RequestException
 import datetime
 import jsondiff
-from threading import Timer
-import sys
+# import sys
+# from proxy_list import ProxyList
+from fp.fp import FreeProxy, FreeProxyException
 from django.core.management import BaseCommand
-import json
+from django.core.paginator import Paginator
 
 
-class ProductsTracker:
+class Styles:
+    colors = [
+        '\033[1;30m', '\033[1;31m', '\033[1;32m', '\033[1;33m', '\033[1;34m',
+        '\033[1;35m', '\033[1;36m', '\033[1;37m', '\033[90m', '\033[92m',
+        '\033[1;41m', '\033[1;42m', '\033[1;43m', '\033[1;44m', '\033[1;45m',
+        '\033[1;46m', '\033[1;47m', '\033[0;30;47m', '\033[0;31;47m', '\033[0;32;47m',
+        '\033[0;33;47m', '\033[0;34;47m', '\033[0;35;47m', '\033[0;36;47m',
+        '\033[1;30m', '\033[1;31m', '\033[1;32m', '\033[1;33m', '\033[1;34m',
+        '\033[1;35m', '\033[1;36m', '\033[1;37m', '\033[90m', '\033[92m',
+    ]
+
+
+class ProductsTracker(Thread):
     parent_file_dir = path.abspath(path.join(path.dirname(__file__), "../../.."))
 
     @staticmethod
     def date_time_milliseconds(date_time_obj: datetime) -> float:
         return float(mktime(date_time_obj.timetuple()) * 1000)
 
-    def __init__(self):
-        self.db_shop = Union[QuerySet, Shops, None] = None
+    def __init__(self, color, threads, paginated):
+        Thread.__init__(self)
+        self.threads = threads
+        self.color = color
+        self.paginated = paginated
         self.shops: Union[list[Union[QuerySet, Shops]], None] = None
+        self.db_shop: Union[QuerySet, Shops, None] = None
+        # self.shops: Union[list[Union[QuerySet, Shops]], None] = None
         self.products: dict = {}
 
     @staticmethod
     def product_info(shop_url: str) -> str:
         return f'{shop_url}/products.json'
 
-    def track(self):
-        self.shops: list[Union[QuerySet, Shops]] = list(
-            Shops.objects.filter(track_enabled=True).exclude(availability=False))
-        return self.load_products()
+    def run(self):
+        while self.paginated.page(int(self.color + 1)).has_next():
+            ids_list = []
+            for id_ in self.paginated.page(int(self.color + 1)).object_list:
+                ids_list.append(id_.pk)
+            self.shops = Shops.objects.filter(id__in=ids_list, checked=False).order_by('-id')
+            # self.shops: list[Union[QuerySet, Shops]] = list(
+            #     Shops.objects.filter(track_enabled=True, has_products=False).exclude(availability=False))
+            self.load_products()
+
+    def print_style(self, message):
+        print(Styles.colors[self.color] + message, '\033[0m')
 
     def load_products(self) -> Union[list[Union[QuerySet, Shops]], None]:
         for shop in self.shops:
-            sleep(randrange(1, 10))
-            response = requests.get(self.product_info(shop.shop_url))
-            if response.status_code == 404:
-                shop.availability = False
-                shop.track_enabled = False
-                shop.save()
-                sys.stdout.write(f"Link {shop.shop_url} returned 404, setting db tracked & availability to False.")
-                break
-            else:
-                response = response.json()
-            started_at = self.date_time_milliseconds(datetime.datetime.utcnow())
-            products = response['products'] if response['products'] else []
-            new_obj = {
-                'products': {},
-                'started_at': started_at,
+            # sleep(randrange(1, 10))
+            # proxies = ProxyList()
+            proxy_str: str = FreeProxy(rand=True).get()
+            schema, ip = proxy_str.split('://')
+            proxy = {
+                schema: ip
             }
-            # db_products = Products.objects.filter(shop=shop).values_list('product', flat=True)
-            # db_products_ids = []
-            # if db_products.__len__() > 0:
-            #     for db_product in db_products:
-            #         db_products_ids.append(db_product['id'])
-            for value in products:
-                product_obj = self.create_product_object(value)
-                # if product_obj['id'] not in db_products_ids:
-                #     Products.objects.create(shop=shop, product=product_obj)
-                # else:
-                new_obj['products'][product_obj['id']] = product_obj
-                del product_obj['sales']
-                Products.objects.update_or_create(shop=shop, product=product_obj)
-            self.products[shop.shop_url] = new_obj
-            sys.stdout.write(f"Added {shop.shop_url} with {self.products[shop.shop_url]['products'].__len__()} "
-                             f"products to memory database.")
+            try:
+                # self.print_style(f"Checking {shop.shop_url.replace('https://', '')}")
+                try:
+                    response = requests.get(self.product_info(shop.shop_url), proxies=proxy)
+                    response = response.json()
+                    started_at = self.date_time_milliseconds(datetime.datetime.utcnow())
+                    try:
+                        products = response['products'] if response['products'] else []
+                        new_obj = {
+                            'products': {},
+                            'started_at': started_at,
+                        }
+                        for value in products:
+                            product_obj = self.create_product_object(value)
+                            new_obj['products'][product_obj['id']] = product_obj
+                            del product_obj['sales']
+                            try:
+                                Products.objects.update_or_create(shop=shop, product=product_obj)
+                            except Products.MultipleObjectsReturned:
+                                pass
+                        self.products[shop.shop_url] = new_obj
+                        self.print_style(f"Added {shop.shop_url.replace('https://', '')} with "
+                                         f"{self.products[shop.shop_url]['products'].__len__()} "
+                                         f"products to memory database.")
+                        if self.products[shop.shop_url]['products'].__len__() > 0:
+                            shop.has_products = True
+                            shop.checked = True
+                            shop.save()
+                        else:
+                            shop.availability = False
+                            shop.track_enabled = False
+                            shop.has_products = False
+                            shop.checked = True
+                            shop.save()
+                    except (KeyError, TypeError):
+                        self.print_style(f"Link {shop.shop_url.replace('https://', '')} Didn't complete setup")
+                        shop.availability = False
+                        shop.track_enabled = False
+                        shop.has_products = False
+                        shop.checked = True
+                        shop.save()
+                except RequestException as e:
+                    self.print_style(f"Link {shop.shop_url.replace('https://', '')} returned {e.strerror}")
+                    shop.availability = False
+                    shop.track_enabled = False
+                    shop.has_products = False
+                    shop.checked = True
+                    shop.save()
+            except FreeProxyException as e:
+                self.print_style(f"Link {shop.shop_url.replace('https://', '')} returned {e.message}")
         return self.shops
 
     @staticmethod
@@ -93,7 +146,7 @@ class ProductsTracker:
     def remove_shop(self, index: int):
         shop_url: str = self.shops[index].shop_url
         del self.shops[index]
-        sys.stdout.write(f'Removed {shop_url} from memory database.')
+        self.print_style(f'Removed {shop_url} from memory database.')
         # sys.stdout.write(f'Removed {shop_url} from memory database.\n')
 
     def check_for_new_products(self, shop_url: str, data: dict):
@@ -101,7 +154,7 @@ class ProductsTracker:
             if not product['id'] in self.products[shop_url]['products'].keys():
                 product_obj = self.create_product_object(product)
                 self.products[shop_url]['products'][product_obj['id']] = product_obj
-                sys.stdout.write(f"Added new product {product_obj['title']} from {shop_url} to memory database.")
+                self.print_style(f"Added new product {product_obj['title']} from {shop_url} to memory database.")
                 del product_obj['sales']
                 shop = Shops.objects.get(shop_url=shop_url)
                 Products.objects.update_or_create(shop=shop, product=product_obj)
@@ -247,7 +300,7 @@ class ProductsTracker:
             ]
         }
         # /** ** sys.stdout.writes the result that is sent to discord ** **/
-        sys.stdout.write(str(embed))
+        self.print_style(str(embed))
 
     @staticmethod
     def get_date_string_serv(timestamp: float) -> str:
@@ -277,36 +330,69 @@ class ProductsTracker:
                         check: dict = self.check_for_diff(prod, product)
                         sold_variant = check['sold_variant']
                     self.update_latest_sale(shop_url, product, sold_variant)
-                    sys.stdout.write(
-                        f"{shop_url} - just sold : "
-                        f"{self.products[shop_url]['products'][product['id']]['sales'].__len__()} \n"
-                        f"New sale -> {product['title']}")
-
+                    self.print_style(f"{shop_url} - just sold : "
+                                     f"{self.products[shop_url]['products'][product['id']]['sales'].__len__()} \n"
+                                     f"New sale -> {product['title']}")
                     self.on_new_sale(shop_url, product, sold_variant)
+
+
+def template(text):
+    return """
+ __________________________
+< {} >
+ --------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\\
+                ||----w | \\
+                ||     ||
+""".format(text)
 
 
 class Command(BaseCommand):
     help = 'Tracking Products'
 
     def handle(self, *args, **options):
-        sys.stdout.write(f'Start Tracking Available & tracked shops.\n')
+        print('Start Tracking Available & tracked shops.\n')
         self.track()
-        sys.stdout.write('\n')
+        print('\n')
 
     @staticmethod
     def track():
-        products_tracker = ProductsTracker()
-        shops = products_tracker.track()
+        threads = 0
+        while True:
+            try:
+                threads = int(input(template("How Many Threads To use ? type here 30: ")))
+            except ValueError:
+                print(template("Sorry, I didn't understand that."))
+                continue
+            else:
+                break
+        shops = Shops.objects.filter(track_enabled=True, has_products=False, checked=False) \
+            .exclude(availability=False).order_by('-id')
+        paginated = Paginator(shops, threads)
+        bots = [ProductsTracker(x, threads, paginated) for x in range(0, threads)]
+        for bot in bots:
+            bot.start()
+            sleep(2)
+        # waiting all bots to finish before start tracking
+        for bot in bots:
+            bot.join()
+        # products_tracker = ProductsTracker()
+        # Filter shops by has products
+        # shops = products_tracker.track()
 
-        def set_interval(func, sec, shop_url):
-            def func_wrapper():
-                set_interval(func, sec, shop_url)
-                func(shop_url)
-
-            t = Timer(sec, func_wrapper)
-            t.start()
-            return t
-
-        interval = Configs.objects.all().first().interval
-        for shop_ in shops:
-            set_interval(products_tracker.check_for_sales, interval, shop_.shop_url)
+        # # Start tracking
+        # def set_interval(func, sec, shop_url):
+        #     def func_wrapper():
+        #         set_interval(func, sec, shop_url)
+        #         func(shop_url)
+        #
+        #     t = Timer(sec, func_wrapper)
+        #     t.start()
+        #     return t
+        #
+        # interval = Configs.objects.all().first().interval
+        # for shop_ in shops:
+        #     if shop_.has_products:
+        #         set_interval(products_tracker.check_for_sales, interval, shop_.shop_url)

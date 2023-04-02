@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'daphne',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
+    # 'django.contrib.sites',
     'django.contrib.postgres',
     'corsheaders',
     'channels',
