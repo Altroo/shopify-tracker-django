@@ -1,7 +1,7 @@
 from typing import Union
 from django.db.models import QuerySet
-from shops.models import Shops, Configs
-from products.models import Products
+from shops.models import Shops, Configs, Proxies
+from products.models import Products, TopSales
 from os import path
 from time import sleep, mktime
 from random import randrange
@@ -13,7 +13,6 @@ from threading import Timer
 import sys
 from django.core.management import BaseCommand
 from threading import Thread
-from fp.fp import FreeProxy, FreeProxyException
 from django.core.paginator import Paginator
 
 

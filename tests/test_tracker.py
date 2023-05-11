@@ -13,11 +13,12 @@ from os import path
 from time import sleep, mktime
 from random import randrange, choice
 import requests
-from requests.exceptions import JSONDecodeError, ConnectionError
+from requests.exceptions import JSONDecodeError, ConnectionError, ProxyError
 import datetime
 import jsondiff
 from threading import Timer
-from fp.fp import FreeProxy, FreeProxyException
+# from fp.fp import FreeProxy, FreeProxyException
+
 
 
 class ProductsTracker:
@@ -37,64 +38,67 @@ class ProductsTracker:
 
     def track(self):
         self.shops: list[Union[QuerySet, Shops]] = list(
-            Shops.objects.filter(track_enabled=True).exclude(availability=False))
+            Shops.objects.filter(track_enabled=True))[:10]
         return self.load_products()
 
     def load_products(self) -> Union[list[Union[QuerySet, Shops]], None]:
         for shop in self.shops:
             burned_proxies = []
             while True:
-                try:
-                    proxy_str_: str = FreeProxy(rand=True, google=True,
-                                                anonym=True, elite=True).get()
-                    schema_, ip_ = proxy_str_.split('://')
-                    proxy_ = {
-                        schema_: ip_
-                    }
-                    if proxy_ in burned_proxies:
-                        continue
-                    # items = list(Proxies.objects.all())
-                    # random_proxy = choice(items)
-                    # proxy_ = {
-                    #     random_proxy.schema: random_proxy.ip
-                    # }
-                    print('proxy 1 : ', proxy_)
-                    # sleep(randrange(1, 3))
-                    try:
-                        response = requests.get(self.product_info(shop.shop_url), proxies=proxy_)
-                        if response.status_code == 404:
-                            shop.availability = False
-                            shop.track_enabled = False
-                            shop.save()
-                            print(f"Link {shop.shop_url} returned 404, setting db tracked & availability to False.")
-                            break
-                        else:
-                            try:
-                                response = response.json()
-                                started_at = self.date_time_milliseconds(datetime.datetime.utcnow())
-                                products = response['products'] if response['products'] else []
-                                new_obj = {
-                                    'products': {},
-                                    'started_at': started_at,
-                                }
-                                for value in products:
-                                    product_obj = self.create_product_object(value)
-                                    new_obj['products'][product_obj['id']] = product_obj
-                                self.products[shop.shop_url] = new_obj
-                                print(f"Added {shop.shop_url} with {self.products[shop.shop_url]['products'].__len__()} "
-                                      f"products to memory database.")
-                                break
-                            except JSONDecodeError:
-                                print(f'Proxy 1 {proxy_} burned trying new proxy')
-                                burned_proxies.append(proxy_)
-                                continue
-                    except ConnectionError:
-                        print(f'Proxy 1 {proxy_} returned connectionError')
-                        burned_proxies.append(proxy_)
-                        continue
-                except FreeProxyException:
-                    print(f'There are no working proxies at this time. repeat')
+                # try:
+                # proxy_str_: str = FreeProxy(rand=True, google=True,
+                #                             anonym=True, elite=True).get()
+                # schema_, ip_ = proxy_str_.split('://')
+                # proxy_ = {
+                #     schema_: ip_
+                # }
+                proxies = list(Proxies.objects.all())
+                random_proxy_ = choice(proxies)
+                proxy_ = {
+                    random_proxy_.schema: random_proxy_.ip
+                }
+                if proxy_ in burned_proxies:
                     continue
+                print('proxy 1 : ', proxy_)
+                # sleep(randrange(1, 3))
+                try:
+                    response = requests.get(self.product_info(shop.shop_url), proxies=proxy_)
+                    if response.status_code == 404:
+                        shop.availability = False
+                        shop.track_enabled = False
+                        shop.save()
+                        print(f"Link {shop.shop_url} returned 404, setting db tracked & availability to False.")
+                        break
+                    else:
+                        try:
+                            response = response.json()
+                            started_at = self.date_time_milliseconds(datetime.datetime.utcnow())
+                            try:
+                                products = response['products'] if response['products'] else []
+                            except KeyError:
+                                products = []
+                            new_obj = {
+                                'products': {},
+                                'started_at': started_at,
+                            }
+                            for value in products:
+                                product_obj = self.create_product_object(value)
+                                new_obj['products'][product_obj['id']] = product_obj
+                            self.products[shop.shop_url] = new_obj
+                            print(f"Added {shop.shop_url} with {self.products[shop.shop_url]['products'].__len__()} "
+                                  f"products to memory database.")
+                            break
+                        except JSONDecodeError:
+                            print(f'Proxy 1 {proxy_} burned trying new proxy')
+                            burned_proxies.append(proxy_)
+                            continue
+                except ConnectionError:
+                    print(f'Proxy 1 {proxy_} returned connectionError')
+                    burned_proxies.append(proxy_)
+                    continue
+                # except FreeProxyException:
+                #     print(f'There are no working proxies at this time. repeat')
+                #     continue
         return self.shops
 
     @staticmethod
@@ -303,7 +307,8 @@ class ProductsTracker:
 
     def check_for_sales(self, shop_url: str, proxy_: dict):
         print(f'Check for sales called for {shop_url} with proxy {proxy_}')
-        response = requests.get(self.product_info(shop_url), proxies=proxy_)
+        # try:
+        response = requests.get(self.product_info(shop_url), proxies=proxy_, timeout=5)
         try:
             data = response.json()
             self.check_for_new_products(shop_url, data)
@@ -334,6 +339,9 @@ class ProductsTracker:
                 print(f'{shop_url} has no new sales yet.')
         except Exception as e:
             print(f'Error at {shop_url}: ', e)
+        # except ProxyError as e:
+        #     # TODO change proxy
+        #     print(f'Error at {shop_url}: ', e)
 
 
 if __name__ == '__main__':
@@ -364,6 +372,21 @@ if __name__ == '__main__':
         proxy = {
             random_proxy.schema: random_proxy.ip
         }
-        print(f'Trying proxy 2 : {proxy}')
+        print(f'Trying proxy 2 : {proxy} for shop {shop_.shop_url}')
+        # TODO fix outdated proxies add new field
+        # from proxy_checker import ProxyChecker
+        # checker = ProxyChecker()
+        # checker.check_proxy('<ip>:<port>')
+        # output
+        # {
+        #   "country": "United States",
+        #   "country_code": "US",
+        #   "protocols": [
+        #   "socks4",
+        #   "socks5"
+        #   ],
+        #   "anonymity": "Elite",
+        #   "timeout": 1649
+        # }
         set_interval(products_tracker.check_for_sales, interval, shop_.shop_url, proxy)
         sleep(randrange(5, 10))

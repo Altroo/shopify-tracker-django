@@ -8,7 +8,7 @@ class CustomShopsAdmin(ModelAdmin):
     list_display = ('pk', 'get_shop_url', 'has_products', 'currency', 'country', 'availability', 'track_enabled',
                     'checked', 'created_date', 'updated_date', 'site_date')
     search_fields = ('shop_url', 'currency', 'country', 'site_date')
-    list_editable = ('has_products', 'track_enabled', 'availability',)
+    list_editable = ('has_products', 'track_enabled', 'availability', 'checked')
     ordering = ('-pk',)
     list_filter = ('has_products', 'checked', 'availability', 'track_enabled', 'currency', 'country', 'site_date', 'has_products')
     date_hierarchy = 'created_date'

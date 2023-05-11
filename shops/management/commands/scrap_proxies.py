@@ -1,4 +1,6 @@
 import os
+import time
+
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'shopify_tracker_backend.settings')
@@ -6,6 +8,7 @@ application = get_wsgi_application()
 from fp.fp import FreeProxy
 from shops.models import Proxies
 from django.db import IntegrityError
+from Proxy_List_Scrapper import Scrapper, Proxy, ScrapperException
 
 
 class ScrapProxies:
@@ -43,13 +46,28 @@ class ScrapProxies:
 
     @staticmethod
     def get_proxy_list():
-        proxy_list = FreeProxy().get_proxy_list(repeat=True)
-        for proxy in proxy_list:
-            try:
-                proxy = Proxies.objects.create(schema='http', ip=proxy)
-                print(f'{proxy} Inserted')
-            except IntegrityError:
-                print(f'Already exists')
+        while True:
+            time.sleep(2)
+            proxy_list = FreeProxy().get_proxy_list(repeat=True)
+            for proxy in proxy_list:
+                try:
+                    proxy = Proxies.objects.create(schema='http', ip=proxy)
+                    print(f'{proxy} Inserted')
+                except IntegrityError:
+                    print(f'{proxy} Already exists')
+
+    @staticmethod
+    def new_proxies():
+        while True:
+            time.sleep(2)
+            scrapper = Scrapper(category='ALL', print_err_trace=False)
+            data = scrapper.getProxies()
+            for item in data.proxies:
+                try:
+                    proxy = Proxies.objects.create(schema='http', ip='{}:{}'.format(item.ip, item.port))
+                    print(f'{proxy} Inserted')
+                except IntegrityError:
+                    print(f'{item.ip, item.port} Already exists')
 
 
 if __name__ == '__main__':

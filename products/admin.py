@@ -23,6 +23,8 @@ class CustomTopSalesAdmin(ModelAdmin):
     list_filter = ('sold_at', 'quantity_sold', 'price', 'compare_at_price')
     date_hierarchy = 'sold_at'
 
+    readonly_fields = ('shop',)
+
     @admin.display(description='Shop url')
     def get_shop_url(self, obj):
         shop_url = obj.shop.shop_url
