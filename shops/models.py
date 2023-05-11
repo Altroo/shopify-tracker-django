@@ -45,4 +45,4 @@ class Proxies(Model):
 
     class Meta:
         verbose_name = 'Proxy'
-        verbose_name_plural = 'Proxies'
+        verbose_name_plural = 'Proxies (2400)'
